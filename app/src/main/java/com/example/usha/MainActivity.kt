@@ -18,22 +18,31 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setNAvigation()
-        supportFragmentManager.beginTransaction().replace(R.id.linearForFragment,CommunityFragment()).commitAllowingStateLoss()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.linearForFragment, CommunityFragment()).commitAllowingStateLoss()
+
     }
 
-    fun setNAvigation(){
+    fun setNAvigation() {
         binding!!.bottomNavView.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.community -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , CommunityFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.linearForFragment, CommunityFragment())
+                        .commitAllowingStateLoss()
                     true
                 }
                 R.id.notification -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , NotificationFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.linearForFragment, NotificationFragment())
+                        .commitAllowingStateLoss()
                     true
                 }
                 R.id.profile -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , ProfileFragment()).commitAllowingStateLoss()
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.linearForFragment, ProfileFragment())
+                        .commitAllowingStateLoss()
+
                     true
                 }
                 else -> false
