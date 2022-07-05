@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import com.example.usha.community.CommunityFragment
 import com.example.usha.databinding.ActivityMainBinding
+import com.example.usha.notification.NotificationFragment
+import com.example.usha.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,22 +18,22 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setNAvigation()
-        supportFragmentManager.beginTransaction().add(R.id.linearForFragment , CommunityFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.linearForFragment,CommunityFragment()).commitAllowingStateLoss()
     }
 
     fun setNAvigation(){
         binding!!.bottomNavView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.community -> {
-                    supportFragmentManager.beginTransaction().add(R.id.linearForFragment , CommunityFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , CommunityFragment()).commitAllowingStateLoss()
                     true
                 }
                 R.id.notification -> {
-                    supportFragmentManager.beginTransaction().add(R.id.linearForFragment , CommunityFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , NotificationFragment()).commitAllowingStateLoss()
                     true
                 }
                 R.id.profile -> {
-                    supportFragmentManager.beginTransaction().add(R.id.linearForFragment , CommunityFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , ProfileFragment()).commitAllowingStateLoss()
                     true
                 }
                 else -> false
