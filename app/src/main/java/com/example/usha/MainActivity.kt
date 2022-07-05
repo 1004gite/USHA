@@ -16,22 +16,22 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setNAvigation()
-        supportFragmentManager.beginTransaction().add(R.id.linearForFragment , CommunityFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , CommunityFragment()).commitAllowingStateLoss()
     }
 
     fun setNAvigation(){
         binding!!.bottomNavView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.community -> {
-                    supportFragmentManager.beginTransaction().add(R.id.linearForFragment , CommunityFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , CommunityFragment()).commitAllowingStateLoss()
                     true
                 }
                 R.id.notification -> {
-                    supportFragmentManager.beginTransaction().add(R.id.linearForFragment , CommunityFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , CommunityFragment()).commitAllowingStateLoss()
                     true
                 }
                 R.id.profile -> {
-                    supportFragmentManager.beginTransaction().add(R.id.linearForFragment , CommunityFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.linearForFragment , CommunityFragment()).commitAllowingStateLoss()
                     true
                 }
                 else -> false
