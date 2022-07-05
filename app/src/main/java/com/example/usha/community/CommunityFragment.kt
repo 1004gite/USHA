@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.get
 import com.example.usha.R
+import com.example.usha.community.recyclerview.CommunityRecyclerAdapter
 import com.example.usha.databinding.FragmentCommunityBinding
 
 class CommunityFragment : Fragment() {
@@ -27,9 +27,10 @@ class CommunityFragment : Fragment() {
         return binding!!.root
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val adapter = CommunityRecyclerAdapter()
+        binding!!.communityRecyclerView.adapter = adapter
     }
+
 }
