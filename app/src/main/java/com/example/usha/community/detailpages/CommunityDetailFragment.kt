@@ -34,12 +34,18 @@ class CommunityDetailFragment() : Fragment() {
             var navOps: NavOptions = NavOptions.Builder().setPopUpTo(R.id.community,true).build()
             navController.navigate(R.id.community,null,navOps)
         }
+        setViewPager()
+
         return binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(CommunityDetailViewModel::class.java)
+    }
+
+    fun setViewPager(){
+
     }
 
 }
