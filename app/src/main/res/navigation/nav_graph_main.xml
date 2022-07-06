@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main"
+    app:startDestination="@id/community">
+
+    <fragment
+        android:id="@+id/community"
+        android:name="com.example.usha.community.CommunityFragment"
+        tools:layout="@layout/fragment_community"
+        >
+        <action
+            android:id="@+id/action_community_to_communityDetail"
+            app:destination="@id/communityDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.example.usha.notification.NotificationFragment"
+        tools:layout="@layout/fragment_notification"
+        />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.usha.profile.ProfileFragment"
+        tools:layout="@layout/fragment_profile"
+        />
+
+
+    <fragment
+        android:id="@+id/communityDetail"
+        android:name="com.example.usha.community.detailpages.CommunityDetailFragment"
+        tools:layout="@layout/fragment_community_detail"
+        />
+
+</navigation>

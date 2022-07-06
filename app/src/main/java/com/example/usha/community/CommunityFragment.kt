@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.usha.R
 import com.example.usha.community.recyclerview.CommunityRecyclerAdapter
 import com.example.usha.databinding.FragmentCommunityBinding
 
-class CommunityFragment : Fragment() {
+class CommunityFragment() : Fragment() {
 
     private var binding: FragmentCommunityBinding? = null
     private lateinit var viewModel: CommunityViewModel
@@ -29,7 +31,10 @@ class CommunityFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = CommunityRecyclerAdapter()
+        val deviceHeight = resources.displayMetrics.heightPixels
+        val navController = this.findNavController()
+        val adapter = CommunityRecyclerAdapter(deviceHeight/5*2, navController)
+        binding!!.communityRecyclerView.layoutManager = LinearLayoutManager(context) // 스크롤 관련 매니저 지정
         binding!!.communityRecyclerView.adapter = adapter
     }
 
