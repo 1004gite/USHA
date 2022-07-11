@@ -4,12 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../ushA/USHA/app/src/main/res/layout/activity_main.xml" value="0.24305572509765627" />
-        <entry key="../../ushA/USHA/app/src/main/res/layout/community_item.xml" value="0.28072916666666664" />
-        <entry key="../../ushA/USHA/app/src/main/res/layout/fragment_community.xml" value="0.4682688395182292" />
-        <entry key="../../ushA/USHA/app/src/main/res/layout/fragment_community_datail.xml" value="0.28072916666666664" />
-        <entry key="../../ushA/USHA/app/src/main/res/layout/fragment_community_detail.xml" value="0.20132013201320131" />
-        <entry key="../../ushA/USHA/app/src/main/res/layout/fragment_detail.xml" value="0.28072916666666664" />
+        <entry key="../../ushA/USHA/app/src/main/res/layout/fragment_community.xml" value="0.13072916666666667" />
         <entry key="../../ushA/USHA/app/src/main/res/menu/menu_bottom.xml" value="0.1296875" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/activity_main.xml" value="0.2876712328767123" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/community_item.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_community.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_community_detail.xml" value="0.4425925925925926" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_detail.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_notification.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_profile.xml" value="0.24947916666666667" />
       </map>
     </option>
   </component>
