@@ -6,13 +6,21 @@
         <entry key="../../ushA/USHA/app/src/main/res/layout/activity_main.xml" value="0.24305572509765627" />
         <entry key="../../ushA/USHA/app/src/main/res/layout/fragment_community.xml" value="0.13072916666666667" />
         <entry key="../../ushA/USHA/app/src/main/res/menu/menu_bottom.xml" value="0.1296875" />
+<<<<<<< Updated upstream
+=======
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1855" />
+>>>>>>> Stashed changes
         <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/activity_main.xml" value="0.2876712328767123" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/community_item.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_community.xml" value="0.264" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_community_detail.xml" value="0.4425925925925926" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_detail.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_notification.xml" value="0.24947916666666667" />
+<<<<<<< Updated upstream
         <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_profile.xml" value="0.24947916666666667" />
+=======
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_profile.xml" value="0.264" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>

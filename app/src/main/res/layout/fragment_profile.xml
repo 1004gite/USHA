@@ -13,10 +13,32 @@
         android:layout_height="match_parent"
         tools:context=".profile.ProfileFragment">
 
+        <ImageView
+            android:layout_width="78dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_baseline_account_circle_24" />
+
         <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="도소라" />
+
+        <TextView
+<<<<<<< Updated upstream
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Test" />
+=======
+            android:id="@+id/user_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dosora9@gmail.com" />
+>>>>>>> Stashed changes
 
+        <ImageView
+            android:layout_width="78dp"
+            android:layout_height="90dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
     </FrameLayout>
 </layout>
