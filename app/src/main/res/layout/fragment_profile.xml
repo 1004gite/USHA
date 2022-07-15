@@ -32,8 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="도소라"
-                app:layout_constraintBaseline_toEndOf="@id/profile_img"
+                android:text="[이름]"
                 app:layout_constraintStart_toEndOf="@id/profile_img"
                 app:layout_constraintTop_toTopOf="@id/profile_img" />
 
@@ -41,7 +40,7 @@
                 android:id="@+id/user_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="dosora9@gmail.com"
+                android:text="[이메일]"
                 app:layout_constraintStart_toEndOf="@id/profile_img"
                 app:layout_constraintTop_toBottomOf="@id/user_name" />
 
