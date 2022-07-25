@@ -10,6 +10,7 @@
     </data>
 
     <FrameLayout
+        android:id="@+id/fragment_profile"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".profile.ProfileFragment">
@@ -17,47 +18,108 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/profile_img"
-                android:layout_width="78dp"
-                android:layout_height="90dp"
-                android:layout_gravity="start"
-                android:src="@drawable/ic_baseline_account_circle_24"
-                />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#00FFFFFF"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="내 프로필"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <ImageButton
+                    android:id="@+id/communityDetailBackBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_baseline_settings_24" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="10"
-                >
+                android:text="마이 프로필"/>
 
-                <TextView
-                    android:id="@+id/user_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="[이름]"
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#7C7C7C"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/profile_img"
+                    android:layout_width="78dp"
+                    android:layout_height="90dp"
+                    android:layout_gravity="start"
+                    android:src="@drawable/ic_baseline_account_circle_24"
                     />
 
-                <TextView
-                    android:id="@+id/user_email"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="[이메일]"
-                    />
+                    android:orientation="vertical"
+                    android:layout_weight="10"
+                    >
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[이름]"
+                        />
+
+                    <TextView
+                        android:id="@+id/user_email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="[이메일]"
+                        />
+                </LinearLayout>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#7C7C7C"/>
 
-            <ImageView
+            <TextView
+                android:id="@+id/myReservation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
+                android:text="마이 예약"/>
 
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profileRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical" />
         </LinearLayout>
-
     </FrameLayout>
 </layout>

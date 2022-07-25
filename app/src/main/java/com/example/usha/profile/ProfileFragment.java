@@ -1,26 +1,30 @@
 package com.example.usha.profile;
 
-import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
-import com.example.usha.R;
+import com.example.usha.databinding.FragmentProfileBinding;
 
+//마이프로필 블록
 public class ProfileFragment extends Fragment {
+    private FragmentProfileBinding binding;
 
-    public ProfileFragment(){
+    @Override
+    public View onCreateView (LayoutInflater inflater,
+                              ViewGroup container,
+                              Bundle savedInstanceState) {
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        return view;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }
