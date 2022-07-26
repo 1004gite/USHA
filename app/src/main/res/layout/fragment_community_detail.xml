@@ -75,12 +75,14 @@
                     android:text="이용후기" />
             </com.google.android.material.tabs.TabLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/communityPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="-2dp" />
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/communityPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
 </layout>
