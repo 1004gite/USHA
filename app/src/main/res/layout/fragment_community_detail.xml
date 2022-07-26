@@ -7,10 +7,10 @@
 
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".community.detailpages.CommunityDetailFragment">
+<!--    <FrameLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:context=".community.detailpages.CommunityDetailFragment">-->
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,14 +75,20 @@
                     android:text="이용후기" />
             </com.google.android.material.tabs.TabLayout>
 
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/communityPager"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="-2dp" />
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/communiotyTabLayout" >
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/communityPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </FrameLayout>
 </layout>
