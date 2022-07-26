@@ -66,7 +66,9 @@ class CommunityDetailFragment() : Fragment() {
             }
         })
         // tablayout attach
+        val titles = arrayOf("개요","커리큘럼","구성원","이용후기")
         TabLayoutMediator(binding!!.communiotyTabLayout, viewPager){ tab, position ->
+            tab.text = titles[position]
 //            Log.e("tabLog", position.toString())
         }.attach()
     }
