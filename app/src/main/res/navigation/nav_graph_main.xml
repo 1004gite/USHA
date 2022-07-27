@@ -25,6 +25,12 @@
         tools:layout="@layout/fragment_profile"
         />
 
+    <fragment
+        android:id="@+id/loginMain"
+        android:name="com.example.usha.login.LoginMainFragment"
+        tools:layout="@layout/fragment_login_main"
+        />
+
 
     <fragment
         android:id="@+id/communityDetail"
