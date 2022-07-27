@@ -1,4 +1,4 @@
-package com.example.usha.login.Model
+package com.example.usha.logins.Model
 
 class LoginInfo {
     lateinit var email: String

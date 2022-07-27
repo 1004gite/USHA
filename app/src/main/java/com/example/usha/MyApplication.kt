@@ -2,7 +2,7 @@ package com.example.usha
 
 import android.app.Application
 import android.content.Context
-import com.example.usha.login.Model.LoginInfo
+import com.example.usha.logins.Model.LoginInfo
 
 class MyApplication : Application() {
     companion object {

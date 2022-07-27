@@ -27,8 +27,14 @@
 
     <fragment
         android:id="@+id/loginMain"
-        android:name="com.example.usha.login.LoginMainFragment"
+        android:name="com.example.usha.logins.LoginMainFragment"
         tools:layout="@layout/fragment_login_main"
+        />
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.usha.logins.login.LoginFragment"
+        tools:layout="@layout/fragment_login"
         />
 
 

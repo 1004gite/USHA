@@ -1,7 +1,7 @@
-package com.example.usha.login
+package com.example.usha.logins.login
 
 import androidx.lifecycle.ViewModel
 
-class LogingMainViewModel : ViewModel() {
+class LoginViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
