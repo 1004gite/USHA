@@ -18,11 +18,11 @@ class MyApplication : Application() {
         prefs = PrefsManager(applicationContext)
         loginInfo = LoginInfo().apply {
             if(prefs.getString(Consts.token, "no") != "no"){
-                loginInfo.email = prefs.getString(Consts.email,"")
-                loginInfo.token = prefs.getString(Consts.token,"")
-                loginInfo.loginned = true
-                loginInfo.isAdmin = prefs.getString(Consts.isAdmin,"") == "true"
-                loginInfo.passWord = prefs.getString(Consts.password, "")
+                email = prefs.getString(Consts.email,"")
+                token = prefs.getString(Consts.token,"")
+                loginned = true
+                isAdmin = prefs.getString(Consts.isAdmin,"") == "true"
+                passWord = prefs.getString(Consts.password, "")
             }
         }
         retrofit = Retrofit.Builder()

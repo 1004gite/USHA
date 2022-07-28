@@ -4,7 +4,11 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.fragment.findNavController
 import com.example.usha.MyApplication
+import com.example.usha.R
 import com.example.usha.logins.login.model.LoginApiInterface
 import com.example.usha.logins.login.model.LoginBody
 import com.example.usha.logins.login.model.LoginResult
@@ -18,6 +22,7 @@ class LoginViewModel : ViewModel() {
     var pwString = MutableLiveData<String>("")
     var _loginClickAble = MutableLiveData<Boolean>(true)
     val loginClickAble: LiveData<Boolean> get() = _loginClickAble
+    lateinit var navController: NavController
 
     fun clickLoginBtn() {
         _loginClickAble.value = false
@@ -49,12 +54,19 @@ class LoginViewModel : ViewModel() {
                     MyApplication.loginInfo.isAdmin = loginResult.isAdmin
                     MyApplication.loginInfo.token = loginResult.token
 
+                    // 로그인시 loginMain까지 백스택에서 제외하고 profile로 이동
+                    var navops: NavOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.loginMain,true).build()
+                    navController.navigate(R.id.profile,null,navops)
                 }
+
+                _loginClickAble.value = true
             }
 
             override fun onFailure(call: Call<LoginResult>, t: Throwable) {
                 Log.e("fail",t.message!!)
                 MyApplication.loginInfo.loginned = false
+                _loginClickAble.value = true
             }
 
         })

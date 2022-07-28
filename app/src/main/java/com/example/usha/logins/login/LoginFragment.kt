@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.usha.R
 import com.example.usha.databinding.FragmentLoginBinding
 
@@ -26,6 +27,7 @@ class LoginFragment : Fragment() {
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(LoginViewModel::class.java)
+        viewModel.navController = this.findNavController()
         binding.viewModel = viewModel
 
         return binding!!.root
