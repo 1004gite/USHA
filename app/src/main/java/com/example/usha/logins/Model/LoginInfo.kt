@@ -5,4 +5,5 @@ class LoginInfo {
     lateinit var passWord: String
     lateinit var token: String
     var loginned: Boolean = false
+    var isAdmin: Boolean = false
 }

@@ -3,31 +3,44 @@ package com.example.usha
 import android.app.Application
 import android.content.Context
 import com.example.usha.logins.Model.LoginInfo
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MyApplication : Application() {
     companion object {
         var Consts = com.example.usha.MyConsts()
         lateinit var prefs: PrefsManager
         lateinit var loginInfo: LoginInfo
+        lateinit var retrofit: Retrofit
     }
 
     override fun onCreate() {
         prefs = PrefsManager(applicationContext)
         loginInfo = LoginInfo().apply {
-            if(prefs.getString(Consts.email, "noEmail") != "noEmail"){
-                // 로그인 시도 후 자동 로그인 할 것
+            if(prefs.getString(Consts.token, "no") != "no"){
+                loginInfo.email = prefs.getString(Consts.email,"")
+                loginInfo.token = prefs.getString(Consts.token,"")
+                loginInfo.loginned = true
+                loginInfo.isAdmin = prefs.getString(Consts.isAdmin,"") == "true"
+                loginInfo.passWord = prefs.getString(Consts.password, "")
             }
         }
+        retrofit = Retrofit.Builder()
+            .baseUrl(Consts.baseURL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
         super.onCreate()
     }
 
 
 }
 
-class MyConsts(){
-    var email = "email"
-    var password = "password"
-    var token = "token"
+class MyConsts {
+    val email = "email"
+    val password = "password"
+    val token = "token"
+    val isAdmin = "isAdmin"
+    val baseURL = "http://ushabackend-env.eba-xwidq8fh.us-east-1.elasticbeanstalk.com"
 }
 
 class PrefsManager(context: Context) {
