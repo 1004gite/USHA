@@ -22,38 +22,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding!!.lifecycleOwner = this
-//        setNAvigation()
-//        replaceFragment(CommunityFragment(replaceFragment))
 
         // fragment controller 설정
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
         binding!!.bottomNavView.setupWithNavController(navController)
     }
-
-//    fun setNAvigation() {
-//        binding!!.bottomNavView.setOnItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.community -> {
-//                    replaceFragment(CommunityFragment(replaceFragment))
-//                    true
-//                }
-//                R.id.notification -> {
-//                    replaceFragment(NotificationFragment())
-//                    true
-//                }
-//                R.id.profile -> {
-//                    replaceFragment(ProfileFragment())
-//                    true
-//                }
-//                else -> false
-//            }
-//        }
-//    }
-//
-//    var replaceFragment: (Fragment)->Int = {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.linearForFragment, it)
-//            .commitAllowingStateLoss()
-//    }
 }
