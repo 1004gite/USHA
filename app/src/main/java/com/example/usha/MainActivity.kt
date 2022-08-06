@@ -1,8 +1,14 @@
 package com.example.usha
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
+import androidx.core.net.toUri
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -13,6 +19,10 @@ import com.example.usha.community.CommunityFragment
 import com.example.usha.databinding.ActivityMainBinding
 import com.example.usha.notification.NotificationFragment
 import com.example.usha.profile.ProfileFragment
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,5 +37,25 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
         binding!!.bottomNavView.setupWithNavController(navController)
+    }
+
+    object BindingAdapters {
+        @JvmStatic
+        @BindingAdapter("imageViewSrcUri")
+        fun setText(imageView: ImageView, uriString: String){
+            // subscribeOn -> 스트림 액션이 끝난 후 다음 스트림으로 옮길 스케쥴러를 설정한다.
+            // observeOn -> 설정 이후 스트림의 액션을 수행할 스케쥴러를 지정한다.
+            Observable.just(uriString)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map {
+                    var iStream = URL(uriString).openStream()
+                    BitmapFactory.decodeStream(iStream)
+                }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    imageView.setImageBitmap(it)
+                }
+        }
     }
 }

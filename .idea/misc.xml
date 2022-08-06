@@ -10,7 +10,11 @@
         <entry key="../../ushA/USHA/app/src/main/res/layout/fragment_community_detail.xml" value="0.20132013201320131" />
         <entry key="../../ushA/USHA/app/src/main/res/layout/fragment_detail.xml" value="0.28072916666666664" />
         <entry key="../../ushA/USHA/app/src/main/res/menu/menu_bottom.xml" value="0.1296875" />
+        <entry key="app/src/main/res/drawable/community_item_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/community_item_image_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/icon_community.xml" value="0.159" />
+        <entry key="app/src/main/res/layout/community_item.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/fragment_community.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/fragment_community_detail.xml" value="0.22544860839843753" />

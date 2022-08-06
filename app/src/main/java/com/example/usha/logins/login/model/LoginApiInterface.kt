@@ -14,7 +14,7 @@ data class LoginResult(
     var name: String,
     var email: String,
     var isAdmin: Boolean,
-    var token: String
+    var token: String,
 )
 
 data class LoginBody(

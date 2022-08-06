@@ -1,10 +1,55 @@
 package com.example.usha.community
 
+import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.usha.MyApplication
+import com.example.usha.community.model.Community
+import com.example.usha.community.model.CommunityItem
+import com.example.usha.community.model.GetCommunityInterface
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CommunityViewModel : ViewModel() {
-    private var _text = MutableLiveData<String>("communityFragment")
 
-    val text: MutableLiveData<String> get() = _text
+    var pages = 0
+    private var _communityItems: MutableLiveData<MutableList<LiveData<Community>>> = MutableLiveData()
+    val communityItems: LiveData<MutableList<LiveData<Community>>> get() = _communityItems
+
+    init {
+        setCommunityItems()
+    }
+
+    fun setCommunityItems(){
+        var tmp = mutableListOf<LiveData<Community>>()
+        var service = MyApplication.retrofit.create(GetCommunityInterface::class.java)
+        service.getCommunities()
+            .enqueue(object : Callback<CommunityItem> {
+                override fun onResponse(
+                    call: Call<CommunityItem>,
+                    response: Response<CommunityItem>
+                ) {
+                    if (response.body() == null) {
+                        // for test
+                        MyApplication.loginInfo.loginned = false
+                    } else {
+                        val cItem = response.body()!!
+                        pages = cItem.pages
+                        for (community in cItem.communities) {
+                            tmp.add(MutableLiveData<Community>(community))
+                        }
+                    }
+
+                    _communityItems.value = tmp
+                }
+
+                override fun onFailure(call: Call<CommunityItem>, t: Throwable) {
+                    Log.e("getCommunitiesFailed", t.message.toString())
+                }
+
+            })
+
+    }
 }
