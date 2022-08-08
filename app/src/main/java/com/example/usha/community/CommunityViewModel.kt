@@ -15,12 +15,8 @@ import retrofit2.Response
 class CommunityViewModel : ViewModel() {
 
     var pages = 0
-    private var _communityItems: MutableLiveData<MutableList<LiveData<Community>>> = MutableLiveData()
+    private var _communityItems: MutableLiveData<MutableList<LiveData<Community>>> = MutableLiveData(mutableListOf<LiveData<Community>>())
     val communityItems: LiveData<MutableList<LiveData<Community>>> get() = _communityItems
-
-    init {
-        setCommunityItems()
-    }
 
     fun setCommunityItems(){
         var tmp = mutableListOf<LiveData<Community>>()

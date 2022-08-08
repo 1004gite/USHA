@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     object BindingAdapters {
         @JvmStatic
         @BindingAdapter("imageViewSrcUri")
-        fun setText(imageView: ImageView, uriString: String){
+        fun setImage(imageView: ImageView, uriString: String){
             // subscribeOn -> 스트림 액션이 끝난 후 다음 스트림으로 옮길 스케쥴러를 설정한다.
             // observeOn -> 설정 이후 스트림의 액션을 수행할 스케쥴러를 지정한다.
             Observable.just(uriString)

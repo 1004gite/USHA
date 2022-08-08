@@ -30,7 +30,7 @@ class CommunityFragment() : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_community, container, false)
         viewModel = ViewModelProvider(this).get(CommunityViewModel::class.java)
-//        if(viewModel.communityItems.value!!.isEmpty()) viewModel.setCommunityItems()
+        if(viewModel.communityItems.value!!.isEmpty()) viewModel.setCommunityItems()
         binding!!.viewModel = viewModel
 
         return binding!!.root
