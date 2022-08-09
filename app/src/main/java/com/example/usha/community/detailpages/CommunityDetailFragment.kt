@@ -109,8 +109,10 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getCurriculumFrag(): Fragment{
+        var imageView = ImageView(mContext)
+        viewUtils.setImageViewUrl(imageView,data.curriculum_img)
         var frag = DetailFragment().apply {
-
+            attachLayout(imageView)
 
             attachLayout(viewUtils.getBlankView(blackHeight))
         }
@@ -119,8 +121,10 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getMemberFrag(): Fragment{
+        var imageView = ImageView(mContext)
+        viewUtils.setImageViewUrl(imageView, data.mentor_img)
         var frag = DetailFragment().apply {
-
+            attachLayout(imageView)
 
             attachLayout(viewUtils.getBlankView(blackHeight))
         }
