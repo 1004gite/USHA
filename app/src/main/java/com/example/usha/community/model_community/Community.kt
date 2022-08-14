@@ -1,6 +1,5 @@
-package com.example.usha.community.model
+package com.example.usha.community.model_community
 
-import androidx.lifecycle.LiveData
 import java.io.Serializable
 
 data class Community(

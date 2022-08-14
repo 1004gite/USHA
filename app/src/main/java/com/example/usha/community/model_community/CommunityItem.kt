@@ -1,4 +1,4 @@
-package com.example.usha.community.model
+package com.example.usha.community.model_community
 
 data class CommunityItem(
     val communities: List<Community>,

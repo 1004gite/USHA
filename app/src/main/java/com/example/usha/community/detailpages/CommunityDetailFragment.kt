@@ -1,7 +1,6 @@
 package com.example.usha.community.detailpages
 
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -21,19 +17,15 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.usha.R
 import com.example.usha.community.detailpages.viewpagers.DetailFragment
 import com.example.usha.community.detailpages.viewpagers.PagerStateFragmentAdapter
-import com.example.usha.community.model.Community
+import com.example.usha.community.model_community.Community
 import com.example.usha.databinding.FragmentCommunityDetailBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
-import java.net.URL
 
 class CommunityDetailFragment() : Fragment() {
 
 //    private lateinit var viewModel: CommunityDetailViewModel
     private lateinit var binding: FragmentCommunityDetailBinding
-    private lateinit var data: Community
+    private lateinit var community: Community
     private lateinit var navController: NavController
     private lateinit var viewPager: ViewPager2
     private lateinit var mContext: Context
@@ -44,15 +36,17 @@ class CommunityDetailFragment() : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_community_detail,container,false)
-        data = arguments?.getSerializable("info") as Community
+        community = arguments?.getSerializable("community") as Community
         mContext = requireContext()
         viewUtils = ViewUtils(mContext)
         navController = this.findNavController()
-        binding!!.communityDetailBackBtn.setOnClickListener {
-            // 뒤로가기 눌렀을 때 지금 페이지까지 오는 경로는 stack에서 제외하는 옵션
-            var navOps: NavOptions = NavOptions.Builder().setPopUpTo(R.id.community,true).build()
-            navController.navigate(R.id.community,null,navOps)
+        binding = DataBindingUtil.inflate<FragmentCommunityDetailBinding?>(inflater,R.layout.fragment_community_detail,container,false).apply {
+            communityDetailBackBtn.setOnClickListener {
+                // 뒤로가기 눌렀을 때 지금 페이지까지 오는 경로는 stack에서 제외하는 옵션
+                var navOps: NavOptions = NavOptions.Builder().setPopUpTo(R.id.community,true).build()
+                navController.navigate(R.id.community,null,navOps)
+            }
+            nameTextView.text = community.name
         }
         setViewPager()
 
@@ -90,15 +84,15 @@ class CommunityDetailFragment() : Fragment() {
 
     fun getSummaryFrag(): Fragment{
         var imageView = ImageView(mContext)
-        viewUtils.setImageViewUrl(imageView, data.introduce_img)
-        var frag = DetailFragment().apply {
+        viewUtils.setImageViewUrl(imageView, community.introduce_img)
+        var frag = DetailFragment(community).apply {
             attachLayout(imageView)
-            attachLayout(viewUtils.getRuleText(data.rule1,false))
-            attachLayout(viewUtils.getRuleText(data.rule1_sub,true))
-            attachLayout(viewUtils.getRuleText(data.rule2,false))
-            attachLayout(viewUtils.getRuleText(data.rule2_sub,true))
+            attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule1,false))
+            attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule1_sub,true))
+            attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule2,false))
+            attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule2_sub,true))
             attachLayout(viewUtils.getCenterTextWithBackgroundColor(
-                "${data.goalTerm}, 여러분은\n${data.goalName}을 이룰 수 있습니다!",
+                "${this@CommunityDetailFragment.community.goalTerm}, 여러분은\n${this@CommunityDetailFragment.community.goalName}을 이룰 수 있습니다!",
                 Color.argb(70,255,100,255)
             ))
 
@@ -110,8 +104,8 @@ class CommunityDetailFragment() : Fragment() {
 
     fun getCurriculumFrag(): Fragment{
         var imageView = ImageView(mContext)
-        viewUtils.setImageViewUrl(imageView,data.curriculum_img)
-        var frag = DetailFragment().apply {
+        viewUtils.setImageViewUrl(imageView,community.curriculum_img)
+        var frag = DetailFragment(community).apply {
             attachLayout(imageView)
 
             attachLayout(viewUtils.getBlankView(blackHeight))
@@ -122,8 +116,8 @@ class CommunityDetailFragment() : Fragment() {
 
     fun getMemberFrag(): Fragment{
         var imageView = ImageView(mContext)
-        viewUtils.setImageViewUrl(imageView, data.mentor_img)
-        var frag = DetailFragment().apply {
+        viewUtils.setImageViewUrl(imageView, community.mentor_img)
+        var frag = DetailFragment(community).apply {
             attachLayout(imageView)
 
             attachLayout(viewUtils.getBlankView(blackHeight))
@@ -133,7 +127,7 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getReviewFrag(): Fragment{
-        var frag = DetailFragment().apply {
+        var frag = DetailFragment(community).apply {
 
 
             attachLayout(viewUtils.getBlankView(blackHeight))

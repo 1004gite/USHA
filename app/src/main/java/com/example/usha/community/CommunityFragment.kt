@@ -8,13 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.usha.MyApplication
 import com.example.usha.R
-import com.example.usha.community.model.Community
 import com.example.usha.community.recyclerview.CommunityRecyclerAdapter
 import com.example.usha.databinding.FragmentCommunityBinding
 

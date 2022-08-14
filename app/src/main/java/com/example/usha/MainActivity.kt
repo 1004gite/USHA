@@ -1,12 +1,17 @@
 package com.example.usha
 
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.webkit.WebView
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.toColor
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
@@ -19,6 +24,8 @@ import com.example.usha.community.CommunityFragment
 import com.example.usha.databinding.ActivityMainBinding
 import com.example.usha.notification.NotificationFragment
 import com.example.usha.profile.ProfileFragment
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -56,6 +63,13 @@ class MainActivity : AppCompatActivity() {
                 .subscribe {
                     imageView.setImageBitmap(it)
                 }
+        }
+
+        @JvmStatic
+        @BindingAdapter("EFBtnChecked","EFBtnTintList")
+        fun checkFloatingBtn(fBtn: ExtendedFloatingActionButton, EFBtnChecked: Boolean, EFBtnTintList: ColorStateList) {
+            fBtn.isClickable = EFBtnChecked
+            fBtn.backgroundTintList = EFBtnTintList
         }
     }
 }

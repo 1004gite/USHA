@@ -47,12 +47,14 @@ class LoginViewModel : ViewModel() {
                     MyApplication.prefs.setString(MyApplication.Consts.password, loginBody.password)
                     MyApplication.prefs.setString(MyApplication.Consts.token, loginResult.token)
                     MyApplication.prefs.setString(MyApplication.Consts.isAdmin, loginResult.isAdmin.toString())
+                    MyApplication.prefs.setString(MyApplication.Consts.name, loginResult.name)
 
                     MyApplication.loginInfo.email = loginBody.email
                     MyApplication.loginInfo.passWord = loginBody.password
                     MyApplication.loginInfo.loginned = true
                     MyApplication.loginInfo.isAdmin = loginResult.isAdmin
                     MyApplication.loginInfo.token = loginResult.token
+                    MyApplication.loginInfo.name = loginResult.name
 
                     // 로그인시 loginMain까지 백스택에서 제외하고 profile로 이동
                     var navops: NavOptions = NavOptions.Builder()

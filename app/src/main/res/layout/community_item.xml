@@ -7,7 +7,7 @@
 
         <variable
             name="community"
-            type="com.example.usha.community.model.Community" />
+            type="com.example.usha.community.model_community.Community" />
     </data>
 
     <LinearLayout

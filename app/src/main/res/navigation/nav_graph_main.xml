@@ -44,4 +44,10 @@
         tools:layout="@layout/fragment_community_detail"
         />
 
+    <fragment
+        android:id="@+id/reservation"
+        android:name="com.example.usha.community.detailpages.reservation.ReservationFragment"
+        tools:layout="@layout/fragment_reservation"
+        />
+
 </navigation>

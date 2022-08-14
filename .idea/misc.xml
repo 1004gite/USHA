@@ -25,6 +25,8 @@
         <entry key="app/src/main/res/layout/fragment_loging_main.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/fragment_notification.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.13072916666666667" />
+        <entry key="app/src/main/res/layout/fragment_reservation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/webview_dialog.xml" value="0.1" />
       </map>
     </option>
   </component>

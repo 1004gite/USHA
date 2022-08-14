@@ -7,8 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.usha.R
-import com.example.usha.community.model.Community
-import com.example.usha.community.model.CommunityItem
+import com.example.usha.community.model_community.Community
 import com.example.usha.databinding.CommunityItemBinding
 
 class CommunityRecyclerAdapter(private val height: Int, val navController: NavController, var communityItems: MutableList<LiveData<Community>>): RecyclerView.Adapter<CommunityViewHolder>() {
@@ -26,7 +25,7 @@ class CommunityRecyclerAdapter(private val height: Int, val navController: NavCo
     override fun onBindViewHolder(holder: CommunityViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             val bundle = Bundle().apply {
-                putSerializable("info",communityItems[position].value)
+                putSerializable("community",communityItems[position].value)
             }
             navController.navigate(R.id.communityDetail,bundle)
         }

@@ -5,9 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.usha.MyApplication
-import com.example.usha.community.model.Community
-import com.example.usha.community.model.CommunityItem
-import com.example.usha.community.model.GetCommunityInterface
+import com.example.usha.community.model_community.Community
+import com.example.usha.community.model_community.CommunityItem
+import com.example.usha.community.model_community.GetCommunityInterface
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
