@@ -23,7 +23,11 @@
         android:id="@+id/profile"
         android:name="com.example.usha.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile"
-        />
+        >
+        <action
+            android:id="@+id/action_profile_to_setting"
+            app:destination="@id/setting" />
+    </fragment>
 
     <fragment
         android:id="@+id/loginMain"
@@ -37,11 +41,25 @@
         tools:layout="@layout/fragment_login"
         />
 
-
     <fragment
         android:id="@+id/communityDetail"
         android:name="com.example.usha.community.detailpages.CommunityDetailFragment"
         tools:layout="@layout/fragment_community_detail"
         />
 
+    <fragment
+        android:id="@+id/setting"
+        android:name="com.example.usha.setting.SettingFragment"
+        tools:layout="@layout/fragment_setting"
+        >
+        <action
+            android:id="@+id/action_setting_to_terms"
+            app:destination="@id/terms" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/terms"
+        android:name="com.example.usha.setting.TermsFragment"
+        tools:layout="@layout/fragment_terms_of_service"
+        />
 </navigation>
