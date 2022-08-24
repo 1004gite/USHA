@@ -26,6 +26,7 @@ class CommunityFragment() : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_community, container, false)
+        binding!!.lifecycleOwner = this
         viewModel = ViewModelProvider(this).get(CommunityViewModel::class.java)
         if(viewModel.communityItems.value!!.isEmpty()) viewModel.setCommunityItems()
         binding!!.viewModel = viewModel

@@ -27,6 +27,7 @@ class CommunityRecyclerAdapter(private val height: Int, val navController: NavCo
             val bundle = Bundle().apply {
                 putSerializable("community",communityItems[position].value)
             }
+//            navController.navigate(R.id.action_community_to_communityDetail, bundle)
             navController.navigate(R.id.communityDetail,bundle)
         }
         holder.bind(communityItems[position].value!!, position)

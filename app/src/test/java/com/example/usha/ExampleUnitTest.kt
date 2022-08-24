@@ -1,6 +1,9 @@
 package com.example.usha
 
 import android.util.Log
+import com.example.usha.community.detailpages.reservation.ReservationApiInterface
+import com.example.usha.community.detailpages.reservation.ReservationRequestBody
+import com.example.usha.community.detailpages.reservation.ReservationResponse
 import com.example.usha.logins.login.model.LoginApiInterface
 import com.example.usha.logins.login.model.LoginBody
 import com.example.usha.logins.login.model.LoginResult
@@ -44,5 +47,46 @@ class ExampleUnitTest {
         while(loop){
 
         }
+    }
+
+    @Test
+    fun clickJoinCommunity(){
+        println("joinTestStart")
+        // 입력을 잘 했는지 예외처리 해도 될듯 여기서
+        val service = getRetrofit().create(ReservationApiInterface::class.java)
+        val body = ReservationRequestBody(
+            "test",
+            "user@user.com",
+            "01012345678",
+            "6219f9b027b11315695518b1",
+            "credit card", // ???
+            "50,000"
+        )
+        var wait = true
+        val testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMTQ3Mzk3ZDA4YmUwNTBkMTE3MjQwNSIsImlhdCI6MTY1OTYwMDcxMywiZXhwIjoxNjYyMTkyNzEzfQ.RnWx6AhY508vZu8wCme-OrdrAqteX_PU-O5IfOcyZyY"
+        service.postReservation("Bearer "+testToken, body).enqueue(object : Callback<ReservationResponse> {
+            override fun onResponse(
+                call: Call<ReservationResponse>,
+                response: Response<ReservationResponse>
+            ) {
+                println("responseLog:"+response.message()+", code: "+response.code())
+                if(response.isSuccessful) println("success:"+ response.body().toString())
+                else println("somethingW:"+ "plz")
+                wait = false
+            }
+
+            override fun onFailure(call: Call<ReservationResponse>, t: Throwable) {
+
+            }
+        })
+        while(true) { }
+
+    }
+
+    fun getRetrofit(): Retrofit{
+        return Retrofit.Builder()
+            .baseUrl("http://ushabackend-env.eba-xwidq8fh.us-east-1.elasticbeanstalk.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 }

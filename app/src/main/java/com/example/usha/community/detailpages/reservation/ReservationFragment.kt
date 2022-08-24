@@ -8,6 +8,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.usha.MyApplication
 import com.example.usha.R
 import com.example.usha.community.model_community.Community
@@ -37,7 +38,8 @@ class ReservationFragment : Fragment() {
                     MyApplication.Consts.reservationTermUrl
                 ),
                 ableTintList!!,
-                disableTintList!!
+                disableTintList!!,
+                findNavController()
             )
         ).get(ReservationViewModel::class.java)
         binding = DataBindingUtil.inflate<FragmentReservationBinding?>(inflater,R.layout.fragment_reservation,container,false).apply {

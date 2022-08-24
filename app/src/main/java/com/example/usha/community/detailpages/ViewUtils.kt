@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup

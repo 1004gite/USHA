@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/icon_community.xml" value="0.159" />
         <entry key="app/src/main/res/layout-v31/community_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
         <entry key="app/src/main/res/layout/community_item.xml" value="0.20761245674740483" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.265625" />
         <entry key="app/src/main/res/layout/fragment_community.xml" value="0.28072916666666664" />
@@ -27,6 +28,7 @@
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/layout/fragment_reservation.xml" value="0.1" />
         <entry key="app/src/main/res/layout/webview_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/menu_bottom.xml" value="0.10729166666666666" />
       </map>
     </option>
   </component>

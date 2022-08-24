@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.usha.R
 import com.example.usha.community.detailpages.viewpagers.DetailFragment
@@ -23,7 +24,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class CommunityDetailFragment() : Fragment() {
 
-//    private lateinit var viewModel: CommunityDetailViewModel
     private lateinit var binding: FragmentCommunityDetailBinding
     private lateinit var community: Community
     private lateinit var navController: NavController
@@ -49,30 +49,31 @@ class CommunityDetailFragment() : Fragment() {
             nameTextView.text = community.name
         }
         setViewPager()
-
-        return binding!!.root
+        return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        viewModel = ViewModelProvider(this).get(CommunityDetailViewModel::class.java)
-    }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        setViewPager()
+//    }
 
     fun setViewPager(){
-        viewPager = binding!!.communityPager
-        viewPager.adapter = PagerStateFragmentAdapter(this).apply {
-            addFragment(getSummaryFrag())
-            addFragment(getCurriculumFrag())
-            addFragment(getMemberFrag())
-            addFragment(getReviewFrag())
-        }
-
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int){
-                super.onPageSelected(position)
-                Log.e("ViewPagerFragment", "Page ${position+1}")
+        viewPager = binding.communityPager.apply {
+            adapter = PagerStateFragmentAdapter(this@CommunityDetailFragment).apply {
+                addFragment(getSummaryFrag())
+                addFragment(getCurriculumFrag())
+                addFragment(getMemberFrag())
+                addFragment(getReviewFrag())
             }
-        })
+
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int){
+                    super.onPageSelected(position)
+//                    Log.e("ViewPagerFragment", "Page ${position+1}")
+                }
+            })
+        }
 
         // tablayout attach
         val titles = arrayOf("개요","커리큘럼","구성원","이용후기")
@@ -85,7 +86,10 @@ class CommunityDetailFragment() : Fragment() {
     fun getSummaryFrag(): Fragment{
         var imageView = ImageView(mContext)
         viewUtils.setImageViewUrl(imageView, community.introduce_img)
-        var frag = DetailFragment(community).apply {
+//        Log.e("urlSummary",community.introduce_img)
+        var frag = DetailFragment().apply {
+            fragTag = "SummaryTag"
+            arguments = this@CommunityDetailFragment.arguments
             attachLayout(imageView)
             attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule1,false))
             attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule1_sub,true))
@@ -105,7 +109,9 @@ class CommunityDetailFragment() : Fragment() {
     fun getCurriculumFrag(): Fragment{
         var imageView = ImageView(mContext)
         viewUtils.setImageViewUrl(imageView,community.curriculum_img)
-        var frag = DetailFragment(community).apply {
+        var frag = DetailFragment().apply {
+            fragTag = "CurriculFrag"
+            arguments = this@CommunityDetailFragment.arguments
             attachLayout(imageView)
 
             attachLayout(viewUtils.getBlankView(blackHeight))
@@ -117,7 +123,9 @@ class CommunityDetailFragment() : Fragment() {
     fun getMemberFrag(): Fragment{
         var imageView = ImageView(mContext)
         viewUtils.setImageViewUrl(imageView, community.mentor_img)
-        var frag = DetailFragment(community).apply {
+        var frag = DetailFragment().apply {
+            fragTag = "MemberFrag"
+            arguments = this@CommunityDetailFragment.arguments
             attachLayout(imageView)
 
             attachLayout(viewUtils.getBlankView(blackHeight))
@@ -127,13 +135,17 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getReviewFrag(): Fragment{
-        var frag = DetailFragment(community).apply {
-
-
+        var frag = DetailFragment().apply {
+            fragTag = "ReviewFrag"
+            arguments = this@CommunityDetailFragment.arguments
             attachLayout(viewUtils.getBlankView(blackHeight))
         }
 
         return frag
     }
 
+    override fun onStop() {
+        super.onStop()
+        binding.communityPager.adapter = null
+    }
 }

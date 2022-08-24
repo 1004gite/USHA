@@ -8,7 +8,10 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
+import android.view.View
 import android.webkit.WebView
+import android.widget.AdapterView
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColor
@@ -16,6 +19,10 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -26,6 +33,7 @@ import com.example.usha.notification.NotificationFragment
 import com.example.usha.profile.ProfileFragment
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -43,6 +51,20 @@ class MainActivity : AppCompatActivity() {
         // fragment controller 설정
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
+        navController.addOnDestinationChangedListener(object: NavController.OnDestinationChangedListener{
+            override fun onDestinationChanged(
+                controller: NavController,
+                destination: NavDestination,
+                arguments: Bundle?
+            ) {
+                Log.e("backQueueLog","=======")
+                for(entry in controller.backQueue) Log.e("backQueue", entry.destination.displayName)
+//                Log.e("backStackEntry","======")
+//                controller.currentBackStackEntry?.destination?.let { Log.e("CurrentBackStackEntry", it.displayName) }
+//                controller.previousBackStackEntry?.destination?.let { Log.e("PreviousBackStackEntry", it.displayName) }
+            }
+
+        })
         binding!!.bottomNavView.setupWithNavController(navController)
     }
 

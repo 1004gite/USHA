@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import com.example.usha.MyApplication
 import com.example.usha.community.model_community.Community
 import com.example.usha.logins.login.model.LoginApiInterface
@@ -18,7 +19,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ReservationViewModel(var community: Community, var mWebViewDialog: Dialog, val ableTintList: ColorStateList, val disableTintList: ColorStateList) : ViewModel() {
+class ReservationViewModel(var community: Community,
+                           var mWebViewDialog: Dialog,
+                           val ableTintList: ColorStateList,
+                           val disableTintList: ColorStateList,
+                           val navController: NavController) : ViewModel() {
 
     // 변화 없이 읽기만 할거면 LiveData를 쓸 필요가 없을듯..
 //    private var _communityName = MutableLiveData(community!!.name)
@@ -48,13 +53,6 @@ class ReservationViewModel(var community: Community, var mWebViewDialog: Dialog,
         _tintList.value = if(_checkedTerms.value!!) ableTintList else disableTintList
     }
 
-    // viewModel에서 인자를 받기 위한 custom Factory
-    class ReservationViewModelFactory(var community: Community,var  myWebViewDialog: Dialog, val ableTintList: ColorStateList, val disableTintList: ColorStateList) : ViewModelProvider.Factory {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ReservationViewModel(community, myWebViewDialog, ableTintList, disableTintList) as T
-        }
-    }
-
     fun clickJoinCommunity(){
         // 입력을 잘 했는지 예외처리 해도 될듯 여기서
         val service = MyApplication.retrofit.create(ReservationApiInterface::class.java)
@@ -66,17 +64,35 @@ class ReservationViewModel(var community: Community, var mWebViewDialog: Dialog,
             "credit card", // ???
             community.price
         )
-        service.postReservation(body).enqueue(object : Callback<ReservationResponse> {
+//        Log.e("reservationBody", body.toString())
+        service.postReservation("Bearer "+MyApplication.loginInfo.token, body).enqueue(object : Callback<ReservationResponse> {
             override fun onResponse(
                 call: Call<ReservationResponse>,
                 response: Response<ReservationResponse>
             ) {
-                Log.e("success", response.body().toString())
+                if(response.code() == 201 || response.code() == 200){
+                    // 요청 성공
+                }
+                else{
+                    // 요청 실패
+                }
+                navController.popBackStack()
             }
 
             override fun onFailure(call: Call<ReservationResponse>, t: Throwable) {
 
             }
         })
+    }
+
+    // viewModel에서 인자를 받기 위한 custom Factory
+    class ReservationViewModelFactory(var community: Community,
+                                      var  myWebViewDialog: Dialog,
+                                      val ableTintList: ColorStateList,
+                                      val disableTintList: ColorStateList,
+                                      val navController: NavController) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            return ReservationViewModel(community, myWebViewDialog, ableTintList, disableTintList, navController) as T
+        }
     }
 }

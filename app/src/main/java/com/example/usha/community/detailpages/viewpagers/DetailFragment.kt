@@ -17,18 +17,21 @@ import com.example.usha.community.model_community.Community
 import com.example.usha.databinding.FragmentDetailBinding
 
 // 이 클래스는 기능이 간단해서 fragment에 기능을 모두 구현하였음
-class DetailFragment(var community: Community) : Fragment() {
-
+class DetailFragment() : Fragment() {
+    private lateinit var community: Community
     private lateinit var binding: FragmentDetailBinding
     private var viewList = mutableListOf<View>()
     private lateinit var navController: NavController
+    var fragTag = "baseFrag"
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//        Log.e(fragTag, viewList.size.toString())
         navController = findNavController()
+        community = arguments?.getSerializable("community") as Community
         binding = DataBindingUtil.inflate<FragmentDetailBinding?>(inflater,R.layout.fragment_detail,container,false).apply {
             for(view in viewList){
                 detailLinearLayout.addView(view)
@@ -55,8 +58,17 @@ class DetailFragment(var community: Community) : Fragment() {
         viewList.add(index, view)
     }
 
+    fun getViewListSize(): Int{
+        return viewList.size
+    }
+
     override fun onStop() {
         super.onStop()
         viewList.stream().forEach { (it.parent as ViewGroup).removeView(it) }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+//        Log.e("destroyed",fragTag)
     }
 }

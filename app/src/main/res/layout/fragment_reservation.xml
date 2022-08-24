@@ -163,7 +163,8 @@
                     android:textSize="20sp"
                     android:clickable="false"
                     EFBtnChecked="@{viewModel.checkedTerms}"
-                    EFBtnTintList="@{viewModel.tintList}"/>
+                    EFBtnTintList="@{viewModel.tintList}"
+                    android:onClick="@{(view)->viewModel.clickJoinCommunity()}"/>
 
             </LinearLayout>
 
