@@ -9,11 +9,7 @@
         android:id="@+id/community"
         android:name="com.example.usha.community.CommunityFragment"
         tools:layout="@layout/fragment_community"
-        >
-        <action
-            android:id="@+id/action_community_to_communityDetail"
-            app:destination="@id/communityDetail" />
-    </fragment>
+        />
     <fragment
         android:id="@+id/notification"
         android:name="com.example.usha.notification.NotificationFragment"
@@ -29,7 +25,11 @@
         android:id="@+id/loginMain"
         android:name="com.example.usha.logins.LoginMainFragment"
         tools:layout="@layout/fragment_login_main"
-        />
+        >
+        <action
+            android:id="@+id/action_loginMain_to_login"
+            app:destination="@id/login" />
+    </fragment>
 
     <fragment
         android:id="@+id/login"
@@ -42,6 +42,12 @@
         android:id="@+id/communityDetail"
         android:name="com.example.usha.community.detailpages.CommunityDetailFragment"
         tools:layout="@layout/fragment_community_detail"
+        />
+
+    <fragment
+        android:id="@+id/reservation"
+        android:name="com.example.usha.community.detailpages.reservation.ReservationFragment"
+        tools:layout="@layout/fragment_reservation"
         />
 
 </navigation>

@@ -1,5 +1,6 @@
 package com.example.usha.community.detailpages.viewpagers
 
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
@@ -11,16 +12,22 @@ class PagerStateFragmentAdapter(fragment: Fragment): FragmentStateAdapter(fragme
     }
 
     override fun createFragment(position: Int): Fragment {
+//        Log.e("adapterCreateFrag",(fragments[position] as DetailFragment).getViewListSize().toString())
         return fragments[position]
     }
 
     fun addFragment(fragment: Fragment){
         fragments.add(fragment)
-        notifyItemInserted(fragments.size - 1)
+//        notifyItemInserted(fragments.size - 1)
     }
 
-    fun removeFragment(){
+    fun removeLastFragment(){
         fragments.removeLast()
-        notifyItemRemoved(fragments.size)
+//        notifyItemRemoved(fragments.size)
     }
+
+//    fun clearFragments(){
+//        fragments.clear()
+//        notifyDataSetChanged()
+//    }
 }
