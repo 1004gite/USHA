@@ -3,7 +3,6 @@ package com.example.usha.community.detailpages
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.usha.R
 import com.example.usha.community.detailpages.viewpagers.DetailFragment
@@ -30,7 +28,8 @@ class CommunityDetailFragment() : Fragment() {
     private lateinit var viewPager: ViewPager2
     private lateinit var mContext: Context
     private lateinit var viewUtils: ViewUtils
-    private var blackHeight = 500
+    private var blankHeight = 500
+    private val imageScaleType = ImageView.ScaleType.FIT_START
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,7 +83,9 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getSummaryFrag(): Fragment{
-        var imageView = ImageView(mContext)
+        var imageView = ImageView(mContext).apply {
+            scaleType = imageScaleType
+        }
         viewUtils.setImageViewUrl(imageView, community.introduce_img)
 //        Log.e("urlSummary",community.introduce_img)
         var frag = DetailFragment().apply {
@@ -100,35 +101,39 @@ class CommunityDetailFragment() : Fragment() {
                 Color.argb(70,255,100,255)
             ))
 
-            attachLayout(viewUtils.getBlankView(blackHeight))
+            attachLayout(viewUtils.getBlankView(blankHeight))
         }
 
         return frag
     }
 
     fun getCurriculumFrag(): Fragment{
-        var imageView = ImageView(mContext)
+        var imageView = ImageView(mContext).apply {
+            scaleType = imageScaleType
+        }
         viewUtils.setImageViewUrl(imageView,community.curriculum_img)
         var frag = DetailFragment().apply {
             fragTag = "CurriculFrag"
             arguments = this@CommunityDetailFragment.arguments
             attachLayout(imageView)
 
-            attachLayout(viewUtils.getBlankView(blackHeight))
+            attachLayout(viewUtils.getBlankView(blankHeight))
         }
 
         return frag
     }
 
     fun getMemberFrag(): Fragment{
-        var imageView = ImageView(mContext)
+        var imageView = ImageView(mContext).apply {
+            scaleType = imageScaleType
+        }
         viewUtils.setImageViewUrl(imageView, community.mentor_img)
         var frag = DetailFragment().apply {
             fragTag = "MemberFrag"
             arguments = this@CommunityDetailFragment.arguments
             attachLayout(imageView)
 
-            attachLayout(viewUtils.getBlankView(blackHeight))
+            attachLayout(viewUtils.getBlankView(blankHeight))
         }
 
         return frag
@@ -138,7 +143,7 @@ class CommunityDetailFragment() : Fragment() {
         var frag = DetailFragment().apply {
             fragTag = "ReviewFrag"
             arguments = this@CommunityDetailFragment.arguments
-            attachLayout(viewUtils.getBlankView(blackHeight))
+            attachLayout(viewUtils.getBlankView(blankHeight))
         }
 
         return frag
