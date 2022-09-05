@@ -31,7 +31,7 @@ class CommunityDetailFragment() : Fragment() {
     private lateinit var mContext: Context
     private lateinit var viewUtils: ViewUtils
     private var blankHeight = 500
-    private val imageScaleType = ImageView.ScaleType.FIT_START
+    private val imageScaleType = ImageView.ScaleType.FIT_CENTER
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,15 +87,11 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getSummaryFrag(): Fragment{
-        var imageView = ImageView(mContext).apply {
-            scaleType = imageScaleType
-        }
-        viewUtils.setImageViewUrl(imageView, community.introduce_img)
-//        Log.e("urlSummary",community.introduce_img)
         var frag = DetailFragment().apply {
             fragTag = "SummaryTag"
             arguments = this@CommunityDetailFragment.arguments
-            attachLayout(imageView)
+            attachLayout(viewUtils.getImageViewWithUrl(community.introduce_img))
+//          이미지 스케일 지정하는 코드      .apply { (this as ImageView).scaleType = imageScaleType })
             attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule1,false))
             attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule1_sub,true))
             attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule2,false))
@@ -112,14 +108,10 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getCurriculumFrag(): Fragment{
-        var imageView = ImageView(mContext).apply {
-            scaleType = imageScaleType
-        }
-        viewUtils.setImageViewUrl(imageView,community.curriculum_img)
         var frag = DetailFragment().apply {
             fragTag = "CurriculFrag"
             arguments = this@CommunityDetailFragment.arguments
-            attachLayout(imageView)
+            attachLayout(viewUtils.getImageViewWithUrl(community.curriculum_img))
 
             attachLayout(viewUtils.getBlankView(blankHeight))
         }
@@ -128,9 +120,6 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getMemberFrag(): Fragment{
-        var imageView = ImageView(mContext).apply {
-            scaleType = imageScaleType
-        }
         var recyclerView = RecyclerView(mContext).apply {
             adapter = MemberRecyclerAdapter(listOf("test"))
             layoutManager = LinearLayoutManager(mContext)
@@ -139,11 +128,10 @@ class CommunityDetailFragment() : Fragment() {
                 RecyclerView.LayoutParams.WRAP_CONTENT
             )
         }
-        viewUtils.setImageViewUrl(imageView, community.mentor_img)
         var frag = DetailFragment().apply {
             fragTag = "MemberFrag"
             arguments = this@CommunityDetailFragment.arguments
-            attachLayout(imageView)
+            attachLayout(viewUtils.getImageViewWithUrl(community.mentor_img))
             attachLayout(recyclerView)
 
             attachLayout(viewUtils.getBlankView(blankHeight))
@@ -164,8 +152,8 @@ class CommunityDetailFragment() : Fragment() {
         var frag = DetailFragment().apply {
             fragTag = "ReviewFrag"
             arguments = this@CommunityDetailFragment.arguments
-
             attachLayout(recyclerView)
+
             attachLayout(viewUtils.getBlankView(blankHeight))
         }
 
