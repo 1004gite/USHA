@@ -43,7 +43,7 @@ class CommunityFragment() : Fragment() {
 
         viewModel.communityItems.observe(viewLifecycleOwner, Observer {
             Log.e("listDebug", viewModel.communityItems.value!!.size.toString())
-            adapter = CommunityRecyclerAdapter(deviceHeight / 5 * 2, navController, viewModel.communityItems.value!!)
+            adapter = CommunityRecyclerAdapter(deviceHeight / 2, navController, viewModel.communityItems.value!!)
             binding!!.communityRecyclerView.adapter = adapter
         })
     }

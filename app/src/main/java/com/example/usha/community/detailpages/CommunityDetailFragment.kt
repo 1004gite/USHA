@@ -3,6 +3,7 @@ package com.example.usha.community.detailpages
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,10 +13,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.usha.R
-import com.example.usha.community.detailpages.viewpagers.DetailFragment
-import com.example.usha.community.detailpages.viewpagers.PagerStateFragmentAdapter
+import com.example.usha.community.detailpages.viewpagers.*
 import com.example.usha.community.model_community.Community
 import com.example.usha.databinding.FragmentCommunityDetailBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -80,6 +82,8 @@ class CommunityDetailFragment() : Fragment() {
             tab.text = titles[position]
 //            Log.e("tabLog", position.toString())
         }.attach()
+
+//        Log.e("reviewLog", community.reviews[0].toString())
     }
 
     fun getSummaryFrag(): Fragment{
@@ -127,11 +131,20 @@ class CommunityDetailFragment() : Fragment() {
         var imageView = ImageView(mContext).apply {
             scaleType = imageScaleType
         }
+        var recyclerView = RecyclerView(mContext).apply {
+            adapter = MemberRecyclerAdapter(listOf("test"))
+            layoutManager = LinearLayoutManager(mContext)
+            layoutParams = RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
+            )
+        }
         viewUtils.setImageViewUrl(imageView, community.mentor_img)
         var frag = DetailFragment().apply {
             fragTag = "MemberFrag"
             arguments = this@CommunityDetailFragment.arguments
             attachLayout(imageView)
+            attachLayout(recyclerView)
 
             attachLayout(viewUtils.getBlankView(blankHeight))
         }
@@ -140,9 +153,19 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getReviewFrag(): Fragment{
+        var recyclerView = RecyclerView(mContext).apply {
+            adapter = ReviewRecyclerAdapter(community.reviews)
+            layoutManager = LinearLayoutManager(mContext)
+            layoutParams = RecyclerView.LayoutParams(
+                RecyclerView.LayoutParams.MATCH_PARENT,
+                RecyclerView.LayoutParams.WRAP_CONTENT
+                )
+        }
         var frag = DetailFragment().apply {
             fragTag = "ReviewFrag"
             arguments = this@CommunityDetailFragment.arguments
+
+            attachLayout(recyclerView)
             attachLayout(viewUtils.getBlankView(blankHeight))
         }
 
