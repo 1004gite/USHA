@@ -1,6 +1,7 @@
 package com.example.usha.community.detailpages
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
@@ -23,6 +24,7 @@ import java.net.URL
 class ViewUtils(var context: Context) {
 
     val bigTextSize = 20f
+    val displayWidth = context.resources.displayMetrics.widthPixels
 
     fun getCenterTextWithBackgroundColor(str: String, backgroundColor: Int): View{
         return TextView(context).apply {
@@ -50,23 +52,40 @@ class ViewUtils(var context: Context) {
         }
     }
 
+    fun getImageViewWithUrl(url: String): View{
+        return ImageView(context).also {
+            it.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            setImageViewUrl(it, url)
+        }
+    }
+
     fun setImageViewUrl(imageView: ImageView, url: String) {
         Observable.just(url)
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .map {
                 var iStream = URL(url).openStream()
-                BitmapFactory.decodeStream(iStream)
+                var bmp = BitmapFactory.decodeStream(iStream)
+                var height = (displayWidth.toFloat()/bmp.width.toFloat())*bmp.height
+                Bitmap.createScaledBitmap(bmp,displayWidth, height.toInt(),false)
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                imageView.setImageBitmap(it)
-            }
+            .subscribe (
+                {imageView.setImageBitmap(it)},
+                {Log.e("setImageErr", it.message.toString())}
+            )
     }
 
     fun getBlankView(height: Int): View {
         return View(context).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height)
+        }
+    }
+
+    fun getShallowLineView(): View{
+        return View(context).apply {
+            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 2)
+            setBackgroundColor(Color.BLUE)
         }
     }
 
