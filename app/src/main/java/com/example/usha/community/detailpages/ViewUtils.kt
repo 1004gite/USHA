@@ -64,6 +64,7 @@ class ViewUtils(var context: Context) {
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
             .map {
+                Log.e("testLog",url)
                 var iStream = URL(url).openStream()
                 var bmp = BitmapFactory.decodeStream(iStream)
                 var height = (displayWidth.toFloat()/bmp.width.toFloat())*bmp.height
