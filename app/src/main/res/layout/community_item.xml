@@ -5,22 +5,36 @@
 
     <data>
 
+        <variable
+            name="community"
+            type="com.example.usha.community.model_community.Community" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/community_item_background"
+        android:layout_margin="20dp"
+        android:background="@drawable/item_round_background"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:elevation="20dp">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_margin="1dp"
+            app:cardCornerRadius="20dp">
+
+            <ImageView
+                android:id="@+id/imageView"
+                imageViewSrcUri="@{community.community_img}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                tools:srcCompat="@tools:sample/avatars"/>
+        </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +49,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="5dp"
-                android:text="테스트 편집 배우기"
+                android:text="@{community.name}"
                 android:textColor="@color/purple_500"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -46,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="5dp"
-                android:text="# 여행, 영상편집" />
+                android:text="@{community.tagString}" />
 
             <TextView
                 android:id="@+id/periodText"
@@ -54,14 +68,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginBottom="5dp"
-                android:text="123 ~ 456"
+                android:text="@{community.periodString}"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -82,7 +97,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView"
+                        android:text="@{community.location}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -106,7 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView"
+                        android:text="@{community.coach}"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>

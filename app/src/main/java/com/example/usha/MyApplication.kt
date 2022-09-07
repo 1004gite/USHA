@@ -18,6 +18,7 @@ class MyApplication : Application() {
         prefs = PrefsManager(applicationContext)
         loginInfo = LoginInfo().apply {
             if(prefs.getString(Consts.token, "no") != "no"){
+                name = prefs.getString(Consts.name,"")
                 email = prefs.getString(Consts.email,"")
                 token = prefs.getString(Consts.token,"")
                 loginned = true
@@ -36,11 +37,13 @@ class MyApplication : Application() {
 }
 
 class MyConsts {
+    val name = "name"
     val email = "email"
     val password = "password"
     val token = "token"
     val isAdmin = "isAdmin"
     val baseURL = "http://ushabackend-env.eba-xwidq8fh.us-east-1.elasticbeanstalk.com"
+    val reservationTermUrl = "http://www.naver.com"
 }
 
 class PrefsManager(context: Context) {
