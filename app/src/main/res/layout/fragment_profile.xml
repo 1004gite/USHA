@@ -37,14 +37,17 @@
                     android:layout_gravity="center"
                     android:text="내 프로필"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    />
 
                 <ImageButton
-                    android:id="@+id/communityDetailBackBtn"
+                    android:id="@+id/profileSettingBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:src="@drawable/ic_baseline_settings_24" />
+                    android:src="@drawable/ic_baseline_settings_24"
+                    />
+
             </androidx.appcompat.widget.Toolbar>
 
             <TextView
@@ -97,7 +100,6 @@
                         />
                 </LinearLayout>
 
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -117,13 +119,12 @@
                 android:layout_height="wrap_content"
                 android:text="마이 예약"/>
 
-
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/profileRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical" />
+
         </LinearLayout>
     </FrameLayout>
 </layout>

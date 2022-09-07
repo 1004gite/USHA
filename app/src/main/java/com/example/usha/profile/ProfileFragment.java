@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavOptions;
@@ -17,6 +19,7 @@ import com.example.usha.databinding.FragmentProfileBinding;
 //마이프로필 블록
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
+    private ImageButton btn_setting;
 
     @Override
     public View onCreateView (LayoutInflater inflater,
@@ -29,8 +32,18 @@ public class ProfileFragment extends Fragment {
                     .setPopUpTo(R.id.profile,true).build();
             NavHostFragment.findNavController(this).navigate(R.id.loginMain, null, navOptions);
         }
+
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        //설정버튼을 네비게이션으로 구현하기
+        btn_setting= binding.profileSettingBtn;
+        btn_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_profile_to_setting);
+            }
+        });
         return view;
     }
 
