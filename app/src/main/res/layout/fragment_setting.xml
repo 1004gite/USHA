@@ -32,10 +32,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageButton
+                    android:background="@android:color/transparent"
                     android:id="@+id/settingBackBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:src="?attr/homeAsUpIndicator"
+                    android:src="@drawable/ic_baseline_arrow_back_ios_24"
                     tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                 <TextView
@@ -59,7 +60,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:background="#7C7C7C"
                 />
             <Button
@@ -72,7 +73,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:background="#7C7C7C"
                 />
 
@@ -86,7 +87,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:background="#7C7C7C"
                 />
             <Button
@@ -99,7 +100,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.5dp"
                 android:background="#7C7C7C"
                 />
 
@@ -107,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=
-                    "Contact"
+                    "📬 Contact"
                 android:textAlignment="center"
                 />
 
@@ -115,17 +116,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=
-                    "불편함, 건의사항, 협업제안 등은 아래로 편하게 말씀해주세요!\n고객님들의 목소리를 귀담아 듣고,\n더 발전하는 헤딩웜이 되겠습니다."
+                    "불편함, 건의사항, 협업제안 등은 아래로 편하게 말씀해주세요!\n고객님들의 목소리를 귀담아 듣고,\n더 발전하는 헤딩웜이 되겠습니다.\n"
                 android:textAlignment="center"
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=
-                    "\n익명 1:1 오픈채팅 : 링크복사"
-                android:textAlignment="center"
-                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="익명 1:1 오픈채팅 : "
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="링크복사" />
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
