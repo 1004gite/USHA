@@ -52,17 +52,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
-
             <TextView
                 android:text="이용약관"
                 android:id="@+id/TermsBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
                 android:background="#00FFFFFF"
                 android:textColor="@color/black"
-                android:layout_marginVertical="8dp"
+                android:paddingVertical="8dp"
                 android:textSize="10dp"
                 />
 
@@ -74,7 +72,7 @@
             <TextView
                 android:text="개인정보 처리방침"
                 android:id="@+id/PolicyBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
                 android:background="#00FFFFFF"
@@ -82,7 +80,7 @@
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:textSize="10dp"
-                android:layout_marginVertical="8dp"
+                android:paddingVertical="8dp"
 
                 />
 
@@ -95,7 +93,7 @@
 
             <TextView
                 android:text="로그아웃"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
                 android:background="#00FFFFFF"
@@ -103,7 +101,7 @@
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:textSize="10dp"
-                android:layout_marginVertical="8dp"
+                android:paddingVertical="8dp"
 
                 />
 
@@ -114,7 +112,7 @@
                 />
             <TextView
                 android:text="회원탈퇴"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
                 android:background="#00FFFFFF"
@@ -122,7 +120,7 @@
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:textSize="10dp"
-                android:layout_marginVertical="8dp"
+                android:paddingVertical="8dp"
 
                 />
 
@@ -176,17 +174,18 @@
                 android:layout_gravity="center">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="익명 1:1 오픈채팅 : "
                     android:textColor="@color/black"
-
                     />
 
                 <TextView
+                    android:id="@+id/CopyBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18dp"
+                    android:textColor="@color/black"
                     android:text="링크복사" />
             </LinearLayout>
 
@@ -197,7 +196,6 @@
                     "이메일 문의하기 : headingwarm10@gmail.com"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-
                 />
             <View
                 android:layout_width="match_parent"
@@ -205,7 +203,7 @@
                 android:background="#7C7C7C"
                 android:layout_marginTop="15dp"
                 />
-        </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 </layout>
