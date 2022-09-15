@@ -1,5 +1,7 @@
 package com.example.usha.setting;
 
+import static com.example.usha.setting.SettingFragment.WvUrl;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,8 +19,7 @@ import com.example.usha.databinding.FragmentTermsOfServiceBinding;
 
 public class TermsFragment extends Fragment {
     private FragmentTermsOfServiceBinding binding;
-    private WebView mWebView;
-    private Button btn_terms;
+    private WebView wv;
 
     @Override
     public View onCreateView (LayoutInflater inflater,
@@ -28,9 +29,10 @@ public class TermsFragment extends Fragment {
         binding = FragmentTermsOfServiceBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        mWebView= binding.wvLayout;
-        mWebView.getSettings().setJavaScriptEnabled(true);
-        mWebView.loadUrl("https://www.headingwarm.com/");
+        wv= binding.wvLayout;
+        wv.getSettings().setJavaScriptEnabled(true);
+
+        wv.loadUrl(WvUrl);
         return view;
     }
     @Override

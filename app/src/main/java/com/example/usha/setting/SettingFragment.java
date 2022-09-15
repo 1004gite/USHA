@@ -18,7 +18,8 @@ import com.example.usha.databinding.FragmentSettingBinding;
 
 public class SettingFragment extends Fragment {
     private FragmentSettingBinding binding;
-    private Button btn_terms;
+    private Button btn_terms,btn_policy;
+    static String WvUrl;
 
     @Override
     public View onCreateView (LayoutInflater inflater,
@@ -28,11 +29,16 @@ public class SettingFragment extends Fragment {
         View view = binding.getRoot();
 
         btn_terms= binding.TermsBtn;
-        btn_terms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_setting_to_terms);
-            }
+        btn_policy = binding.PolicyBtn;
+        //이용약관
+        btn_terms.setOnClickListener(view1 -> {
+            WvUrl = "https://www.headingwarm.com/term2";
+            Navigation.findNavController(view1).navigate(R.id.action_setting_to_terms);
+        });
+        //개인정보 처리 방침
+        btn_policy.setOnClickListener(view2 -> {
+            WvUrl = "https://www.headingwarm.com/term";
+            Navigation.findNavController(view2).navigate(R.id.action_setting_to_terms);
         });
         return view;
     }

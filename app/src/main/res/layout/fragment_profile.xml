@@ -81,10 +81,11 @@
                     />
 
                 <LinearLayout
+                    android:layout_marginStart="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="10"
+                    android:layout_weight="115"
                     >
 
                     <TextView
@@ -103,8 +104,8 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
                     android:layout_weight="1"
                     android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
 
