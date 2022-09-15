@@ -25,13 +25,13 @@ public class ProfileFragment extends Fragment {
     public View onCreateView (LayoutInflater inflater,
                               ViewGroup container,
                               Bundle savedInstanceState) {
-//        if(!MyApplication.loginInfo.getLoginned()){
-//            //stack에서 profile fragment가 나올때까지 stack을 pop한다.
-//            // inclusive == true이면 인자로 넣은 fragment까지 pop한다.
-//            NavOptions navOptions = new NavOptions.Builder()
-//                    .setPopUpTo(R.id.profile,true).build();
-//            NavHostFragment.findNavController(this).navigate(R.id.loginMain, null, navOptions);
-//        }
+        if(!MyApplication.loginInfo.getLoginned()){
+            //stack에서 profile fragment가 나올때까지 stack을 pop한다.
+            // inclusive == true이면 인자로 넣은 fragment까지 pop한다.
+            NavOptions navOptions = new NavOptions.Builder()
+                    .setPopUpTo(R.id.profile,true).build();
+            NavHostFragment.findNavController(this).navigate(R.id.loginMain, null, navOptions);
+        }
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
