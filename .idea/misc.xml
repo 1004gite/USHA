@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/item_review.xml" value="0.1005" />
+        <entry key="app/src/main/res/drawable/item_round_background.xml" value="0.1015" />
+        <entry key="app/src/main/res/layout/fragment_login_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.28072916666666664" />
+        <entry key="app/src/main/res/layout/item_review.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>

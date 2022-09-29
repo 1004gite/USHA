@@ -10,8 +10,11 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.usha.MyApplication;
 import com.example.usha.R;
 import com.example.usha.databinding.FragmentProfileBinding;
 import com.example.usha.databinding.FragmentSettingBinding;
@@ -33,6 +36,11 @@ public class SettingFragment extends Fragment {
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_setting_to_terms);
             }
+        });
+        binding.btnLogout.setOnClickListener((btn) -> {
+            MyApplication.logoutFunc();
+            // 프로필 화면으로
+            NavHostFragment.findNavController(this).popBackStack();
         });
         return view;
     }
