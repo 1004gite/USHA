@@ -68,4 +68,9 @@
         tools:layout="@layout/fragment_reservation"
         />
 
+    <fragment
+        android:id="@+id/register"
+        android:name="com.example.usha.register.RegisterFragment"
+        tools:layout="@layout/fragment_register"/>
+
 </navigation>

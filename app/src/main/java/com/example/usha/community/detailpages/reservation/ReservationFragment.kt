@@ -14,6 +14,7 @@ import com.example.usha.R
 import com.example.usha.community.model_community.Community
 import com.example.usha.databinding.FragmentReservationBinding
 import com.example.usha.dialogUtils.DialogUtils
+import io.reactivex.rxjava3.subjects.PublishSubject
 
 class ReservationFragment : Fragment() {
 
@@ -21,6 +22,7 @@ class ReservationFragment : Fragment() {
     private lateinit var viewModel: ReservationViewModel
     private lateinit var binding: FragmentReservationBinding
     private lateinit var mCommunity: Community
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

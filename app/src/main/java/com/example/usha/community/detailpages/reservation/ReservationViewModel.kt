@@ -25,16 +25,6 @@ class ReservationViewModel(var community: Community,
                            val disableTintList: ColorStateList,
                            val navController: NavController) : ViewModel() {
 
-    // 변화 없이 읽기만 할거면 LiveData를 쓸 필요가 없을듯..
-//    private var _communityName = MutableLiveData(community!!.name)
-//    val communityName: LiveData<String> get() = _communityName
-//
-//    private var _communityTag = MutableLiveData(community!!.tagString)
-//    val communityTag: LiveData<String> get() = _communityTag
-//
-//    private var _communityPeriod = MutableLiveData(community!!.periodString)
-//    val communityPeriod: LiveData<String> get() = _communityPeriod
-
     private var _checkedTerms = MutableLiveData(false)
     val checkedTerms: LiveData<Boolean> get() = _checkedTerms
     private var _tintList = MutableLiveData(disableTintList)
