@@ -12,6 +12,13 @@ class MyApplication : Application() {
         lateinit var prefs: PrefsManager
         lateinit var loginInfo: LoginInfo
         lateinit var retrofit: Retrofit
+
+        @JvmStatic
+        fun logoutFunc(): Boolean{
+            loginInfo.loginned = false
+            prefs.setString(Consts.token, "no")
+            return loginInfo.loginned
+        }
     }
 
     override fun onCreate() {
@@ -30,6 +37,7 @@ class MyApplication : Application() {
             .baseUrl(Consts.baseURL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+
         super.onCreate()
     }
 

@@ -12,8 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.usha.MyApplication;
 import com.example.usha.R;
 import com.example.usha.databinding.FragmentSettingBinding;
 
@@ -50,6 +55,11 @@ public class SettingFragment extends Fragment {
             ClipData clipData = ClipData.newPlainText("copyText",CopyLink);
             clipboardManager.setPrimaryClip(clipData);
             Toast.makeText(getActivity().getApplicationContext(),"링크가 클립보드에 복사되었습니다.",Toast.LENGTH_SHORT).show();
+        });
+        binding.btnLogout.setOnClickListener((btn) -> {
+            MyApplication.logoutFunc();
+            // 프로필 화면으로
+            NavHostFragment.findNavController(this).popBackStack();
         });
         return view;
     }

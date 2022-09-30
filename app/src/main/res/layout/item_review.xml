@@ -14,7 +14,7 @@
         android:layout_marginTop="25dp"
         android:layout_marginHorizontal="10dp"
         android:orientation="vertical"
-        android:background="@drawable/item_round_background">
+        android:background="@drawable/item_review">
 
         <TextView
             android:layout_width="wrap_content"

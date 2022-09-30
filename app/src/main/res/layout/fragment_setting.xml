@@ -95,7 +95,6 @@
                 android:text="로그아웃"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="onClick"
                 android:background="#00FFFFFF"
                 android:textColor="@color/black"
                 android:minHeight="0dp"
@@ -104,6 +103,7 @@
                 android:paddingVertical="8dp"
 
                 />
+
 
             <View
                 android:layout_width="match_parent"

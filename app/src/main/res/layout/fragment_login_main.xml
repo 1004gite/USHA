@@ -9,7 +9,7 @@
             type="com.example.usha.logins.LogingMainViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -20,28 +20,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme">
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/btnLoginMainX"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/btn_dialog"
-                android:onClick="@{(view)->viewModel.clickXbtn()}"/>
+                android:onClick="@{(view)->viewModel.clickXbtn()}"
+                android:src="@drawable/ic_baseline_arrow_back_ios_24" />
         </androidx.appcompat.widget.Toolbar>
 
         <Button
             android:id="@+id/btnLoginMainLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="20dp"
+            android:onClick="@{(view)->viewModel.clickLoginBtn()}"
             android:text="로그인하기"
-            android:onClick="@{(view)->viewModel.clickLoginBtn()}"/>
+            app:layout_constraintBottom_toTopOf="@+id/btnLoginMainregister"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnLoginMainregister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="28dp"
+            android:onClick="@{(view)->viewModel.clickRegisterBtn()}"
             android:text="회원가입 하기"
-            android:onClick="@{(view)->viewModel.clickRegisterBtn()}"/>
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/btnLoginMainLogin"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar4"
+            app:srcCompat="@drawable/login_main_image"
+            tools:layout_editor_absoluteX="0dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
