@@ -13,6 +13,7 @@ import android.view.View
 import android.webkit.WebView
 import android.widget.AdapterView
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.toColor
 import androidx.core.net.toUri
@@ -29,6 +30,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.usha.community.CommunityFragment
 import com.example.usha.databinding.ActivityMainBinding
+import com.example.usha.dialogUtils.DialogUtils
 import com.example.usha.notification.NotificationFragment
 import com.example.usha.profile.ProfileFragment
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -38,12 +40,14 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import io.reactivex.rxjava3.subjects.PublishSubject
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
 
     private var binding: ActivityMainBinding? = null
+    val dialogUtils = DialogUtils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,6 +71,11 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
+        MyApplication.toastPublisher = PublishSubject.create<String?>().apply {
+            subscribe { Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT).show() }
+        }
+
         binding!!.bottomNavView.setupWithNavController(navController)
     }
 

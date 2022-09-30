@@ -17,7 +17,7 @@ class LogingMainViewModel : ViewModel() {
     }
 
     fun clickRegisterBtn(){
-
+        navController.navigate(R.id.register)
     }
 
 }

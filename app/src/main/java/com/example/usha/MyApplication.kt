@@ -1,8 +1,12 @@
 package com.example.usha
 
+import android.app.AlertDialog
 import android.app.Application
 import android.content.Context
+import android.widget.TextView
+import android.widget.Toast
 import com.example.usha.logins.Model.LoginInfo
+import io.reactivex.rxjava3.subjects.PublishSubject
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -19,6 +23,8 @@ class MyApplication : Application() {
             prefs.setString(Consts.token, "no")
             return loginInfo.loginned
         }
+
+        lateinit var toastPublisher: PublishSubject<String>
     }
 
     override fun onCreate() {
@@ -31,6 +37,7 @@ class MyApplication : Application() {
                 loginned = true
                 isAdmin = prefs.getString(Consts.isAdmin,"") == "true"
                 passWord = prefs.getString(Consts.password, "")
+                id = prefs.getString(Consts.id, "")
             }
         }
         retrofit = Retrofit.Builder()
@@ -52,6 +59,7 @@ class MyConsts {
     val isAdmin = "isAdmin"
     val baseURL = "http://ushabackend-env.eba-xwidq8fh.us-east-1.elasticbeanstalk.com"
     val reservationTermUrl = "http://www.naver.com"
+    val id = "id"
 }
 
 class PrefsManager(context: Context) {

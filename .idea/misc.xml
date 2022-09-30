@@ -7,8 +7,11 @@
         <entry key="app/src/main/res/drawable/item_review.xml" value="0.1005" />
         <entry key="app/src/main/res/drawable/item_round_background.xml" value="0.1015" />
         <entry key="app/src/main/res/layout/fragment_login_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.28072916666666664" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_terms_of_service.xml" value="0.18177083333333333" />
         <entry key="app/src/main/res/layout/item_review.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/webview_dialog.xml" value="0.18177083333333333" />
       </map>
     </option>
   </component>

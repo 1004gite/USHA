@@ -4,10 +4,11 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.POST
+import retrofit2.http.Path
 
-interface LogoutApiInterface {
-    @DELETE("api/users/6209c432a1f5d209600dc75f")
-    fun deleteUser(@Body deleteUserBody: DeleteUserBody): Call<DeleteUserResponse>
+interface DisjoinApiInterface {
+    @DELETE("api/users/{id}")
+    fun deleteUser(@Path("id") id:String, @Body deleteUserBody: DeleteUserBody): Call<DeleteUserResponse>
 }
 data class DeleteUserResponse(
     var test: String

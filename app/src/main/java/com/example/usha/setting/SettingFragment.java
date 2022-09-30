@@ -61,6 +61,9 @@ public class SettingFragment extends Fragment {
             // 프로필 화면으로
             NavHostFragment.findNavController(this).popBackStack();
         });
+
+
+
         return view;
     }
 }
