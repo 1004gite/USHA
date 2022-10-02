@@ -31,17 +31,22 @@ class RegisterViewModel: ViewModel() {
     var check3 = MutableLiveData<Boolean>(false)
     var check2 = MutableLiveData<Boolean>(false)
 
+    val emailRegex = "^.+@.+$".toRegex()
+
     val service = MyApplication.retrofit.create(RegisterApiInterface::class.java)
 
-    var termCheck: Boolean = false
-        get() {return check1.value!! && check2.value!! && check3.value!!}
+    val termCheck: Boolean
+        get() { return check1.value!! && check2.value!! && check3.value!!}
+
+    val insertCheck: Boolean
+        get() { return name.value != "" && emailRegex.matches(email.value!!) && pw.value != "" }
 
     fun clickBackBtn(){
         navController.popBackStack()
     }
 
     fun register(){
-        if(name.value == "" || email.value==""||pw.value==""){
+        if(!insertCheck){
             MyApplication.toastPublisher.onNext("모든 항목을 입력해 주세요!")
         }
         else if(pw.value != pw2.value){
