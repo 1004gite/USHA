@@ -25,6 +25,14 @@ class LoginViewModel : ViewModel() {
     lateinit var navController: NavController
     val service = MyApplication.retrofit.create(LoginApiInterface::class.java)
 
+    fun gotoRegister() {
+        navController.navigate(R.id.register)
+    }
+
+    fun findPw(){
+
+    }
+
     fun clickLoginBtn() {
         _loginClickAble.value = false
         // 예외처리
