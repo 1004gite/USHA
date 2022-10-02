@@ -42,7 +42,7 @@
             android:id="@+id/regiExplain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/purple_200"
+            android:background="@color/purple_bright"
             android:paddingVertical="7dp"
             android:paddingLeft="20dp"
             android:text="회원님께 딱 맞는 \n커뮤니티가 기다리고 있어요!"

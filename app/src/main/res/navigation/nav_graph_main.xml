@@ -73,4 +73,9 @@
         android:name="com.example.usha.register.RegisterFragment"
         tools:layout="@layout/fragment_register"/>
 
+    <fragment
+        android:id="@+id/findpw"
+        android:name="com.example.usha.logins.findpw.FindPWFragment"
+        tools:layout="@layout/fragment_find_p_w"/>
+
 </navigation>

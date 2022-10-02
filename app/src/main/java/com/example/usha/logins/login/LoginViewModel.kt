@@ -30,7 +30,7 @@ class LoginViewModel : ViewModel() {
     }
 
     fun findPw(){
-
+        navController.navigate(R.id.findpw)
     }
 
     fun clickLoginBtn() {

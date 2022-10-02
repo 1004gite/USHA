@@ -6,6 +6,8 @@
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_review.xml" value="0.1005" />
         <entry key="app/src/main/res/drawable/item_round_background.xml" value="0.1015" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.13072916666666667" />
+        <entry key="app/src/main/res/layout/fragment_find_p_w.xml" value="0.13072916666666667" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_login_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
