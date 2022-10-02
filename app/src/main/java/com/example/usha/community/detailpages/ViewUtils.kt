@@ -5,11 +5,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.marginBottom
 import androidx.core.view.setMargins
@@ -25,6 +30,20 @@ class ViewUtils(var context: Context) {
 
     val bigTextSize = 20f
     val displayWidth = context.resources.displayMetrics.widthPixels
+
+    fun getPercentTextView(str:String, percent: Int):View{
+        return TextView(context).apply {
+            val string = "$str\t\t\t\t$percent%"
+            text = SpannableStringBuilder(string).apply {
+                setSpan(StyleSpan(Typeface.BOLD), str.length, string.length,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            textSize = 19f
+            setTextColor(Color.BLACK)
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+                setMargins(200,50,50,50)
+            }
+        }
+    }
 
     fun getCenterTextWithBackgroundColor(str: String, backgroundColor: Int): View{
         return TextView(context).apply {

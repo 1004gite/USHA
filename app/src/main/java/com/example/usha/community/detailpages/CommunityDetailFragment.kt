@@ -2,13 +2,24 @@ package com.example.usha.community.detailpages
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.BackgroundColorSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
+import android.text.style.StyleSpan
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
@@ -152,6 +163,38 @@ class CommunityDetailFragment() : Fragment() {
         var frag = DetailFragment().apply {
             fragTag = "ReviewFrag"
             arguments = this@CommunityDetailFragment.arguments
+            attachLayout(TextView(mContext).apply {
+                val str = "Data로 확인하는 수강효과"
+                text = SpannableStringBuilder(str).apply {
+                    setSpan(StyleSpan(Typeface.BOLD), 0, 4,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(RelativeSizeSpan(1.3f),0,4,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(StyleSpan(Typeface.BOLD), 10, 15,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(RelativeSizeSpan(1.3f),10,15,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(BackgroundColorSpan(Color.parseColor("#E2C9FF")), 0, str.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                textSize = 19f
+                setTextColor(Color.BLACK)
+                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+                    setMargins(100,30,10,10)
+                }
+            })
+            attachLayout(viewUtils.getPercentTextView("완강률",100))
+            attachLayout(viewUtils.getPercentTextView("목표달성률",100))
+            attachLayout(viewUtils.getPercentTextView("만족도",100))
+            attachLayout(TextView(mContext).apply {
+                val str = "Review로 확인하는 수강효과"
+                text = SpannableStringBuilder(str).apply {
+                    setSpan(StyleSpan(Typeface.BOLD), 0, 6,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(RelativeSizeSpan(1.3f),0,6,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(StyleSpan(Typeface.BOLD), 13, 17,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(RelativeSizeSpan(1.3f),13,17,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    setSpan(BackgroundColorSpan(Color.parseColor("#E2C9FF")), 0, str.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+                textSize = 19f
+                setTextColor(Color.BLACK)
+                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+                    setMargins(100,30,10,10)                }
+            })
             attachLayout(recyclerView)
 
             attachLayout(viewUtils.getBlankView(blankHeight))

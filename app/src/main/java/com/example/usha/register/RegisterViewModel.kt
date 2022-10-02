@@ -70,11 +70,11 @@ class RegisterViewModel: ViewModel() {
     }
 
     fun showTerm1(){
-        dialogPublisher.onNext("http://www.naver.com")
+        dialogPublisher.onNext("https://www.headingwarm.com/term2")
     }
 
     fun showTerm2(){
-        dialogPublisher.onNext("http://www.naver.com")
+        dialogPublisher.onNext("https://www.headingwarm.com/term")
     }
 
 }
