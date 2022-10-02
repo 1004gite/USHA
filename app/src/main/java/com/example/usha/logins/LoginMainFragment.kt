@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.setPadding
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -58,7 +59,10 @@ class LoginMainFragment : Fragment() {
             .setPositiveButton("확인", null)
             .create()
             .apply {
-                setView(TextView(context).apply { setText(text)})
+                setView(TextView(context).apply {
+                    setText(text)
+                    setPadding(50)
+                })
                 show()
             }
     }

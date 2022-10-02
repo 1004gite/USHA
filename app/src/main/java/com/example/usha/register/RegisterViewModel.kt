@@ -55,6 +55,7 @@ class RegisterViewModel: ViewModel() {
             // 가입 후 로그인 main페이지로
             service.register(RegisterBody(name.value!!, email.value!!, pw.value!!)).enqueue(object : Callback<Any> {
                 override fun onResponse(call: Call<Any>, response: Response<Any>) {
+                    Log.e("registerResult", response.message())
                     navController.popBackStack()
                 }
                 override fun onFailure(call: Call<Any>, t: Throwable) {
