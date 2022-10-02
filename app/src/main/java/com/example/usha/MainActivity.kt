@@ -24,6 +24,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -31,6 +32,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.usha.community.CommunityFragment
 import com.example.usha.databinding.ActivityMainBinding
 import com.example.usha.dialogUtils.DialogUtils
+import com.example.usha.logins.login.model.LoginApiInterface
+import com.example.usha.logins.login.model.LoginBody
+import com.example.usha.logins.login.model.LoginResult
 import com.example.usha.notification.NotificationFragment
 import com.example.usha.profile.ProfileFragment
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -41,6 +45,10 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.create
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
@@ -71,12 +79,32 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
-
         MyApplication.toastPublisher = PublishSubject.create<String?>().apply {
             subscribe { Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT).show() }
         }
 
         binding!!.bottomNavView.setupWithNavController(navController)
+        checkLoginInfo()
+    }
+
+    fun checkLoginInfo(){
+        if(!MyApplication.loginInfo.loginned) return
+        val loginBody = LoginBody(MyApplication.loginInfo.email,MyApplication.loginInfo.passWord)
+        MyApplication.retrofit.create(LoginApiInterface::class.java)
+            .getLoginResult(loginBody).enqueue(object : Callback<LoginResult> {
+            override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
+                if(response.body() == null){
+                    // 로그인 실패
+                    MyApplication.loginInfo.loginned = false
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResult>, t: Throwable) {
+                MyApplication.toastPublisher.onNext("네트워크가 불안정하여 다시 로그인 해야합니다")
+                MyApplication.loginInfo.loginned = false
+            }
+
+        })
     }
 
     object BindingAdapters {

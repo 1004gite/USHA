@@ -23,6 +23,7 @@ class LoginViewModel : ViewModel() {
     var _loginClickAble = MutableLiveData<Boolean>(true)
     val loginClickAble: LiveData<Boolean> get() = _loginClickAble
     lateinit var navController: NavController
+    val service = MyApplication.retrofit.create(LoginApiInterface::class.java)
 
     fun clickLoginBtn() {
         _loginClickAble.value = false
@@ -32,13 +33,12 @@ class LoginViewModel : ViewModel() {
             return
         }
         // 로그인
-        val service = MyApplication.retrofit.create(LoginApiInterface::class.java)
         val loginBody = LoginBody(emailString.value!!, pwString.value!!)
         service.getLoginResult(loginBody).enqueue(object : Callback<LoginResult> {
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
-                Log.e("success",response.body().toString())
                 if(response.body() == null){
                     // 로그인 실패
+                    MyApplication.toastPublisher.onNext("로그인 실패")
                     MyApplication.loginInfo.loginned = false
                 }
                 else{
