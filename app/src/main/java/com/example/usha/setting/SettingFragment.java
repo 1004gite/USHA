@@ -115,11 +115,6 @@ public class SettingFragment extends Fragment {
             alertD.show();
         });
 
-        binding.btnLogout.setOnClickListener((btn) -> {
-            MyApplication.logoutFunc();
-            // 프로필 화면으로
-            NavHostFragment.findNavController(this).popBackStack();
-        });
         binding.settingBackBtn.setOnClickListener((btn) -> {
             NavHostFragment.findNavController(this).popBackStack();
         });
