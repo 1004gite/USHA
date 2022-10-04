@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar3"
                 android:layout_width="match_parent"
@@ -29,8 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageButton
-                    android:background="@android:color/transparent"
+                <ImageView
                     android:id="@+id/settingBackBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -46,7 +46,8 @@
                     android:textSize="16sp" />
 
             </androidx.appcompat.widget.Toolbar>
-        <LinearLayout
+
+            <LinearLayout
             android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,7 +93,7 @@
                 />
 
             <TextView
-                android:id="@+id/btnLogout"
+                android:id="@+id/btn_logout"
                 android:text="로그아웃"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -102,7 +103,6 @@
                 android:minWidth="0dp"
                 android:textSize="10dp"
                 android:paddingVertical="8dp"
-
                 />
 
 
@@ -111,18 +111,18 @@
                 android:layout_height="0.5dp"
                 android:background="#7C7C7C"
                 />
-
             <TextView
-                android:id="@+id/btnDisjoin"
                 android:text="회원탈퇴"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="onClick"
                 android:background="#00FFFFFF"
                 android:textColor="@color/black"
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:textSize="10dp"
                 android:paddingVertical="8dp"
+                android:id="@+id/btn_disjoin"
                 />
 
             <View
