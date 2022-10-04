@@ -3,22 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/community_item.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_community.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_community_detail.xml" value="0.264" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_profile.xml" value="0.16770833333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/USHA/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/item_review.xml" value="0.1005" />
         <entry key="app/src/main/res/drawable/item_round_background.xml" value="0.1015" />
-        <entry key="app/src/main/res/layout/fragment_community.xml" value="0.13125" />
-        <entry key="app/src/main/res/layout/fragment_community_detail.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.13072916666666667" />
-        <entry key="app/src/main/res/layout/fragment_find_p_w.xml" value="0.13072916666666667" />
-        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_login_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_terms_of_service.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/fragment_setting.xml" value="0.28072916666666664" />
         <entry key="app/src/main/res/layout/item_review.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/webview_dialog.xml" value="0.18177083333333333" />
       </map>
     </option>
   </component>
