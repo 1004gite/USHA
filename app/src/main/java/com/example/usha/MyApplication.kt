@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.usha.logins.Model.LoginInfo
 import io.reactivex.rxjava3.subjects.PublishSubject
 import retrofit2.Retrofit
@@ -28,6 +29,7 @@ class MyApplication : Application() {
     }
 
     override fun onCreate() {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         prefs = PrefsManager(applicationContext)
         loginInfo = LoginInfo().apply {
             if(prefs.getString(Consts.token, "no") != "no"){

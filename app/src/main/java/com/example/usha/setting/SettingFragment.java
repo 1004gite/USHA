@@ -118,6 +118,7 @@ public class SettingFragment extends Fragment {
         binding.settingBackBtn.setOnClickListener((btn) -> {
             NavHostFragment.findNavController(this).popBackStack();
         });
+
         return view;
     }
 }
