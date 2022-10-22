@@ -8,6 +8,7 @@ import com.example.usha.R
 import com.example.usha.databinding.ItemMemberBinding
 
 // 가입 맴버를 불러오는 api가 아직 서버측에서 제공되지 않고 있음
+// 추후 사용 예정
 class MemberRecyclerAdapter(val members: List<String>): RecyclerView.Adapter<MemberRecyclerViewHolder>(){
 
 

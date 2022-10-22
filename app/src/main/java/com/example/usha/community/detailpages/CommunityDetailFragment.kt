@@ -131,19 +131,19 @@ class CommunityDetailFragment() : Fragment() {
     }
 
     fun getMemberFrag(): Fragment{
-        var recyclerView = RecyclerView(mContext).apply {
-            adapter = MemberRecyclerAdapter(listOf("test"))
-            layoutManager = LinearLayoutManager(mContext)
-            layoutParams = RecyclerView.LayoutParams(
-                RecyclerView.LayoutParams.MATCH_PARENT,
-                RecyclerView.LayoutParams.WRAP_CONTENT
-            )
-        }
+//        var recyclerView = RecyclerView(mContext).apply {
+//            adapter = MemberRecyclerAdapter(listOf("test"))
+//            layoutManager = LinearLayoutManager(mContext)
+//            layoutParams = RecyclerView.LayoutParams(
+//                RecyclerView.LayoutParams.MATCH_PARENT,
+//                RecyclerView.LayoutParams.WRAP_CONTENT
+//            )
+//        }
         var frag = DetailFragment().apply {
             fragTag = "MemberFrag"
             arguments = this@CommunityDetailFragment.arguments
             attachLayout(viewUtils.getImageViewWithUrl(community.mentor_img))
-            attachLayout(recyclerView)
+//            attachLayout(recyclerView)
 
             attachLayout(viewUtils.getBlankView(blankHeight))
         }
