@@ -60,7 +60,6 @@ class MyConsts {
     val token = "token"
     val isAdmin = "isAdmin"
     val baseURL = "http://ushabackend-env.eba-xwidq8fh.us-east-1.elasticbeanstalk.com"
-    val reservationTermUrl = "http://www.naver.com"
     val id = "id"
 }
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import com.example.usha.MainActivity
 import com.example.usha.MyApplication
 import com.example.usha.community.model_community.Community
 import com.example.usha.logins.login.model.LoginApiInterface
@@ -62,6 +63,7 @@ class ReservationViewModel(var community: Community,
             ) {
                 if(response.code() == 201 || response.code() == 200){
                     // 요청 성공
+                    MyApplication.toastPublisher.onNext("가입 성공")
                 }
                 else{
                     // 요청 실패

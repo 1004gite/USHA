@@ -37,7 +37,7 @@ class ReservationFragment : Fragment() {
                 DialogUtils().getWebViewDialog(
                     requireContext(),
                     R.layout.webview_dialog,
-                    MyApplication.Consts.reservationTermUrl
+                    "https://www.headingwarm.com/term"
                 ),
                 ableTintList!!,
                 disableTintList!!,
