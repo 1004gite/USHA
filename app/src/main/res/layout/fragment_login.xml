@@ -52,14 +52,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="@dimen/marginWidth_wide"
-                android:hint="비밀번호">
+                android:hint="비밀번호"
+                app:passwordToggleEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_pw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@={viewModel.pwString}"
-                    android:inputType="textPassword"/>
+                    android:longClickable="false"
+                    android:inputType="textPassword"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
