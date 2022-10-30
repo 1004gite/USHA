@@ -11,8 +11,9 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2764102564102564" />
         <entry key="app/src/main/res/layout/fragment_login_main.xml" value="0.2764102564102564" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2764102564102564" />
+        <entry key="app/src/main/res/layout/test_calendar.xml" value="0.13072916666666667" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
