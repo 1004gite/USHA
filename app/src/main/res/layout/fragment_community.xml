@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.usha.community.CommunityViewModel" />
+            type="com.headingWarm.usha.community.CommunityViewModel" />
     </data>
 
     <FrameLayout

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.usha.register.RegisterViewModel" />
+            type="com.headingWarm.usha.register.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

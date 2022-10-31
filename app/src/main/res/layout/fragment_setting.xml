@@ -6,7 +6,7 @@
     <data>
         <variable
             name="setting"
-            type="com.example.usha.setting.SettingFragment" />
+            type="com.headingWarm.usha.setting.SettingFragment" />
     </data>
 
     <FrameLayout
