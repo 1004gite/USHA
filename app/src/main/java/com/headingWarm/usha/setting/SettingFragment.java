@@ -4,6 +4,7 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,9 +13,10 @@ import android.view.ViewGroup;
 
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import androidx.navigation.Navigation;
+import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.headingWarm.usha.MyApplication;
@@ -27,16 +29,18 @@ import retrofit2.Response;
 
 public class SettingFragment extends Fragment {
     private FragmentSettingBinding binding;
-    static String WvUrl,CopyLink;
+    private NavController navController;
+    private Bundle bdterm,bdPolicy;
+    ClipboardManager clipboardManager;
     int padding = 50;
     DisjoinApiInterface logoutService = MyApplication.retrofit.create(DisjoinApiInterface.class);
-//    DeleteUserBody dBody = new DeleteUserBody(
-//            MyApplication.loginInfo.name,
-//            MyApplication.loginInfo.email,
-//            "01012341234",
-//            "6208b04d6714d6062f0fe9ba",
-//            "credit card",
-//            "50,000");
+    private Context context;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     @Override
     public View onCreateView (LayoutInflater inflater,
@@ -45,28 +49,26 @@ public class SettingFragment extends Fragment {
         binding = FragmentSettingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        CopyLink = "https://www.headingwarm.com";
+        navController = NavHostFragment.findNavController(this);
+        clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
+
+        bdterm = new Bundle();
+        bdterm.putString("url","https://www.headingwarm.com/term2");
+
+        bdPolicy = new Bundle();
+        bdPolicy.putString("url","https://www.headingwarm.com/term");
 
         //이용약관
-        binding.TermsBtn.setOnClickListener(view1 -> {
-            WvUrl = "https://www.headingwarm.com/term2";
-            Navigation.findNavController(view1).navigate(R.id.action_setting_to_terms);
-        });
+        binding.TermsBtn.setOnClickListener((v)->{navController.navigate(R.id.action_setting_to_terms, bdterm);});
         //개인정보 처리 방침
-        binding.PolicyBtn.setOnClickListener(view2 -> {
-            WvUrl = "https://www.headingwarm.com/term";
-            Navigation.findNavController(view2).navigate(R.id.action_setting_to_terms);
-        });
+        binding.PolicyBtn.setOnClickListener((v) ->{navController.navigate(R.id.action_setting_to_terms, bdPolicy);});
         //링크복사
         binding.CopyBtn.setOnClickListener(view3 -> {
-            ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
-            ClipData clipData = ClipData.newPlainText("copyText",CopyLink);
-            clipboardManager.setPrimaryClip(clipData);
+            clipboardManager.setPrimaryClip(ClipData.newPlainText("copyText","https://www.headingwarm.com"));
             MyApplication.toastPublisher.onNext("링크가 클립보드에 복사되었습니다.");
-//            Toast.makeText(getActivity().getApplicationContext(),"링크가 클립보드에 복사되었습니다.",Toast.LENGTH_SHORT).show();
         });
         binding.btnLogout.setOnClickListener((btn) -> {
-            AlertDialog alertD = new AlertDialog.Builder(getContext())
+            AlertDialog alertD = new AlertDialog.Builder(context)
                     .setTitle("로그아웃")
                     .setPositiveButton("확인", ((dialogInterface, i) -> {
                         MyApplication.logoutFunc();
@@ -75,7 +77,7 @@ public class SettingFragment extends Fragment {
                     }))
                     .setNegativeButton("아니오", null)
                     .create();
-            TextView tv = new TextView(getContext());
+            TextView tv = new TextView(context);
             tv.setText("로그아웃 하시겠습니까?");
             tv.setPadding(padding,padding,padding,padding);
             alertD.setView(tv);
@@ -84,7 +86,7 @@ public class SettingFragment extends Fragment {
 
         binding.btnDisjoin.setOnClickListener((btn) -> {
 
-            AlertDialog alertD = new AlertDialog.Builder(getContext())
+            AlertDialog alertD = new AlertDialog.Builder(context)
                     .setTitle("회원탈퇴")
                     .setPositiveButton("확인", ((dialogInterface, i) -> {
                         logoutService.deleteUser("Bearer "+MyApplication.loginInfo.token, MyApplication.loginInfo.id ).enqueue(new Callback<Object>() {
@@ -103,7 +105,7 @@ public class SettingFragment extends Fragment {
                     }))
                     .setNegativeButton("아니오", null)
                     .create();
-            TextView tv = new TextView(getContext());
+            TextView tv = new TextView(context);
             tv.setText("탈퇴 하시겠습니까?");
             tv.setPadding(padding,padding,padding,padding);
             alertD.setView(tv);

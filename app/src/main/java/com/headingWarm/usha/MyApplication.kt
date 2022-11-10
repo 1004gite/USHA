@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class MyApplication : Application() {
     companion object {
-        var Consts = com.headingWarm.usha.MyConsts()
+        // 앱 전역적으로 쓰이는 기능들
         lateinit var prefs: PrefsManager
         lateinit var loginInfo: LoginInfo
         lateinit var retrofit: Retrofit
@@ -48,16 +48,6 @@ class MyApplication : Application() {
     }
 
 
-}
-
-class MyConsts {
-    val name = "name"
-    val email = "email"
-    val password = "password"
-    val token = "token"
-    val isAdmin = "isAdmin"
-    val baseURL = "http://ushabackend-env.eba-xwidq8fh.us-east-1.elasticbeanstalk.com"
-    val id = "id"
 }
 
 class PrefsManager(context: Context) {

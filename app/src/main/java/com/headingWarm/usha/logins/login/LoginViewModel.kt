@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
+import com.headingWarm.usha.Consts
 import com.headingWarm.usha.MyApplication
 import com.headingWarm.usha.R
 import com.headingWarm.usha.logins.login.model.LoginApiInterface
@@ -50,12 +51,12 @@ class LoginViewModel : ViewModel() {
                 }
                 else{
                     val loginResult= response.body()!!
-                    MyApplication.prefs.setString(MyApplication.Consts.email, loginBody.email)
-                    MyApplication.prefs.setString(MyApplication.Consts.password, loginBody.password)
-                    MyApplication.prefs.setString(MyApplication.Consts.token, loginResult.token)
-                    MyApplication.prefs.setString(MyApplication.Consts.isAdmin, loginResult.isAdmin.toString())
-                    MyApplication.prefs.setString(MyApplication.Consts.name, loginResult.name)
-                    MyApplication.prefs.setString(MyApplication.Consts.id, loginResult._id)
+                    MyApplication.prefs.setString(Consts.email, loginBody.email)
+                    MyApplication.prefs.setString(Consts.password, loginBody.password)
+                    MyApplication.prefs.setString(Consts.token, loginResult.token)
+                    MyApplication.prefs.setString(Consts.isAdmin, loginResult.isAdmin.toString())
+                    MyApplication.prefs.setString(Consts.name, loginResult.name)
+                    MyApplication.prefs.setString(Consts.id, loginResult._id)
 
                     MyApplication.loginInfo.email = loginBody.email
                     MyApplication.loginInfo.passWord = loginBody.password
