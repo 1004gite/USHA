@@ -47,6 +47,7 @@ public class SettingFragment extends Fragment {
                               ViewGroup container,
                               Bundle savedInstanceState) {
         binding = FragmentSettingBinding.inflate(inflater, container, false);
+        binding.setLifecycleOwner(this);
         View view = binding.getRoot();
 
         navController = NavHostFragment.findNavController(this);
