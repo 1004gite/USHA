@@ -90,7 +90,7 @@ public class SettingFragment extends Fragment {
             AlertDialog alertD = new AlertDialog.Builder(context)
                     .setTitle("회원탈퇴")
                     .setPositiveButton("확인", ((dialogInterface, i) -> {
-                        logoutService.deleteUser("Bearer "+MyApplication.loginInfo.token, MyApplication.loginInfo.id ).enqueue(new Callback<Object>() {
+                        logoutService.deleteUser("Bearer "+MyApplication.loginInfo.getToken(), MyApplication.loginInfo.getId() ).enqueue(new Callback<Object>() {
                             @Override
                             public void onResponse(Call<Object> call, Response<Object> response) {
                                 Log.e("회원탈퇴", response.message());

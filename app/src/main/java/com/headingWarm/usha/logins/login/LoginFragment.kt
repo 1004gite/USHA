@@ -21,13 +21,14 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_login,container,false)
+        binding = DataBindingUtil.inflate<FragmentLoginBinding?>(inflater,R.layout.fragment_login,container,false).apply {
+            lifecycleOwner = this@LoginFragment
+        }
 
         viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            LoginViewModel.LoginVMFac(LoginModel(findNavController()))
         ).get(LoginViewModel::class.java)
-        viewModel.navController = this.findNavController()
         binding.viewModel = viewModel
 
         return binding!!.root

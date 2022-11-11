@@ -9,12 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.headingWarm.usha.R
 import com.headingWarm.usha.databinding.NotificationItemBinding
 
-class NotificationRecyclerAdapter(val viewModel: NotificationViewModel)
+class NotificationRecyclerAdapter(var item: MutableList<Int>)
     : RecyclerView.Adapter<NotificationRecyclerAdapter.NotificationRecyclerViewHolder>() {
 
-    init {
-        // for test
-        if(viewModel.item.isEmpty()) viewModel.item.add(1)
+    fun changeItem(item: MutableList<Int>){
+        this.item = item
     }
 
     override fun onCreateViewHolder(
@@ -31,7 +30,7 @@ class NotificationRecyclerAdapter(val viewModel: NotificationViewModel)
     }
 
     override fun getItemCount(): Int {
-        return viewModel.item.size
+        return item.size
     }
 
     class NotificationRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
