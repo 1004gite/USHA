@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.headingWarm.usha.MyApplication
-import com.headingWarm.usha.community.model_community.Community
+import com.headingWarm.usha.community.item_community.Community
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

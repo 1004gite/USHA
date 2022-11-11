@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.headingWarm.usha.R
-import com.headingWarm.usha.community.model_community.Community
+import com.headingWarm.usha.community.item_community.Community
 import com.headingWarm.usha.databinding.FragmentReservationBinding
 import com.headingWarm.usha.dialogUtils.DialogUtils
 
@@ -34,7 +34,6 @@ class ReservationFragment : Fragment() {
                 mCommunity,
                 DialogUtils().getWebViewDialog(
                     requireContext(),
-                    R.layout.webview_dialog,
                     "https://www.headingwarm.com/term"
                 ),
                 ableTintList!!,

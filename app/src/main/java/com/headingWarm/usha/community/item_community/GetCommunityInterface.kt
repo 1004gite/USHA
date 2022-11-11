@@ -1,4 +1,4 @@
-package com.headingWarm.usha.community.model_community
+package com.headingWarm.usha.community.item_community
 
 import retrofit2.Call
 import retrofit2.http.GET

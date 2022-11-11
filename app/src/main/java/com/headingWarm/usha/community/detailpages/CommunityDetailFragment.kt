@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.headingWarm.usha.R
 import com.headingWarm.usha.community.detailpages.viewpagers.*
-import com.headingWarm.usha.community.model_community.Community
+import com.headingWarm.usha.community.item_community.Community
 import com.headingWarm.usha.databinding.FragmentCommunityDetailBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

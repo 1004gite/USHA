@@ -34,7 +34,7 @@ class RegisterFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModel.model.termUrl.observe(viewLifecycleOwner) {
-            dialUtil.getWebViewDialog(context!!, R.layout.webview_dialog, it).show()
+            dialUtil.getWebViewDialog(context!!, it).show()
         }
 
         return binding.root

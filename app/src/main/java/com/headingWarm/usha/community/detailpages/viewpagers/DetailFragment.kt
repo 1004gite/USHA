@@ -10,7 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.headingWarm.usha.MyApplication
 import com.headingWarm.usha.R
-import com.headingWarm.usha.community.model_community.Community
+import com.headingWarm.usha.community.item_community.Community
 import com.headingWarm.usha.databinding.FragmentDetailBinding
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 

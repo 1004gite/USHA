@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.headingWarm.usha.R
-import com.headingWarm.usha.community.model_community.Review
+import com.headingWarm.usha.community.item_community.Review
 import com.headingWarm.usha.databinding.ItemReviewBinding
 
 class ReviewRecyclerAdapter(val reviews: List<Review>): RecyclerView.Adapter<ReviewViewHolder>() {
