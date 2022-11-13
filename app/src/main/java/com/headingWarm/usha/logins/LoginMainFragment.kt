@@ -18,11 +18,7 @@ import com.headingWarm.usha.databinding.FragmentLoginMainBinding
 
 class LoginMainFragment : Fragment() {
 
-//    companion object {
-//        fun newInstance() = LoginMainFragment()
-//    }
-
-    private lateinit var viewModel: LogingMainViewModel
+    private lateinit var viewModel: LoginMainViewModel
     private lateinit var binding: FragmentLoginMainBinding
 
     override fun onCreateView(
@@ -36,19 +32,15 @@ class LoginMainFragment : Fragment() {
             this.findNavController().navigate(R.id.profile,null,navops)
         }
 
+        viewModel = ViewModelProvider(this, LoginMainViewModel.LoginMainVMFac(findNavController())).get(LoginMainViewModel::class.java)
+        binding = DataBindingUtil.inflate<FragmentLoginMainBinding?>(inflater,R.layout.fragment_login_main,container,false).apply {
+            lifecycleOwner = this@LoginMainFragment
+            viewModel = this@LoginMainFragment.viewModel
+        }
 
-        // 로그인이 필요합니다 알림
         showAlertDialog("경고","로그인이 필요합니다.")
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_login_main,container,false)
 
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        ).get(LogingMainViewModel::class.java)
-        viewModel.navController = this.findNavController()
-
-        binding!!.viewModel = viewModel
-        return binding!!.root
+        return binding.root
     }
 
     fun showAlertDialog(title:String, text: String){

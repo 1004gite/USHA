@@ -42,7 +42,7 @@
                     android:id="@+id/edit_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={viewModel.emailString}"/>
+                    android:text="@={viewModel.model.emailString}"/>
             </com.google.android.material.textfield.TextInputLayout>
             <!--                @=을 쓰면 양방향 데이터 공유가 가능함-->
 
@@ -59,7 +59,7 @@
                     android:id="@+id/edit_pw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@={viewModel.pwString}"
+                    android:text="@={viewModel.model.pwString}"
                     android:longClickable="false"
                     android:inputType="textPassword"
                     />
@@ -100,8 +100,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:backgroundTint="@color/purple_500"
-            android:clickable="@{viewModel.loginClickAble}"
+            android:backgroundTint="@{viewModel.loginClickable? @color/ableBtnColor : @color/disableBtnColor}"
+            android:clickable="@{viewModel.loginClickable}"
             android:onClick="@{(view)->viewModel.clickLoginBtn()}"
             android:text="로그인하기"
             android:textColor="@color/white"

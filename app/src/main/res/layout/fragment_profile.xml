@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="profile"
-            type="com.headingWarm.usha.profile.ProfileFragment" />
+            name="viewModel"
+            type="com.headingWarm.usha.profile.ProfileViewModel" />
     </data>
 
     <FrameLayout
@@ -48,6 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+                    android:onClick="@{(view)->viewModel.clickSettingBtn()}"
                     android:src="@drawable/ic_baseline_settings_24"
                     />
 
@@ -92,14 +93,14 @@
                         android:id="@+id/user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="[이름]"
+                        android:text="@{viewModel.name}"
                         />
 
                     <TextView
                         android:id="@+id/user_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="[이메일]"
+                        android:text="@{viewModel.email}"
                         />
                 </LinearLayout>
 
@@ -125,6 +126,8 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/profileRecyclerView"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical" />

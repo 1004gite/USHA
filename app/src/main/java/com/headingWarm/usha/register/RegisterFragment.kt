@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.headingWarm.usha.R
@@ -18,23 +19,23 @@ class RegisterFragment : Fragment() {
 
     lateinit var binding: FragmentRegisterBinding
     lateinit var viewModel: RegisterViewModel
-    val dialogPublisher = PublishSubject.create<String>()
     val dialUtil = DialogUtils()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        dialogPublisher.subscribe(
-            { dialUtil.getWebViewDialog(context!!,R.layout.webview_dialog, it).show() },
-            {Log.e("webViewErr", it.message.toString())}
-        )
 
         binding = DataBindingUtil.inflate<FragmentRegisterBinding?>(inflater, R.layout.fragment_register,container, false)
             .apply { lifecycleOwner = this@RegisterFragment }
-        viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java).apply {
-            dialogPublisher = this@RegisterFragment.dialogPublisher
-            navController = this@RegisterFragment.findNavController()
+
+        viewModel = with(RegisterViewModel.RegisterViewModelFac(RegisterModel(findNavController()))){
+            ViewModelProvider(this@RegisterFragment,this).get(RegisterViewModel::class.java)
         }
+
         binding.viewModel = viewModel
+
+        viewModel.model.termUrl.observe(viewLifecycleOwner) {
+            dialUtil.getWebViewDialog(context!!, it).show()
+        }
 
         return binding.root
     }

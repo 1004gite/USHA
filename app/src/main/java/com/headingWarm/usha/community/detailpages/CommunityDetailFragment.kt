@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.BackgroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,15 +18,19 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.headingWarm.usha.R
 import com.headingWarm.usha.community.detailpages.viewpagers.*
-import com.headingWarm.usha.community.model_community.Community
+import com.headingWarm.usha.community.item_community.Community
 import com.headingWarm.usha.databinding.FragmentCommunityDetailBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -35,20 +40,15 @@ class CommunityDetailFragment() : Fragment() {
     private lateinit var community: Community
     private lateinit var navController: NavController
     private lateinit var viewPager: ViewPager2
-    private lateinit var mContext: Context
-    private lateinit var viewUtils: ViewUtils
-    private var blankHeight = 500
-    private val imageScaleType = ImageView.ScaleType.FIT_CENTER
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         community = arguments?.getSerializable("community") as Community
-        mContext = requireContext()
-        viewUtils = ViewUtils(mContext)
-        navController = this.findNavController()
-        binding = DataBindingUtil.inflate<FragmentCommunityDetailBinding?>(inflater,R.layout.fragment_community_detail,container,false).apply {
+        navController = findNavController()
+        binding = FragmentCommunityDetailBinding.inflate(inflater).apply {
+            lifecycleOwner = this@CommunityDetailFragment
             communityDetailBackBtn.setOnClickListener {
                 // 뒤로가기 눌렀을 때 지금 페이지까지 오는 경로는 stack에서 제외하는 옵션
                 var navOps: NavOptions = NavOptions.Builder().setPopUpTo(R.id.community,true).build()
@@ -60,147 +60,45 @@ class CommunityDetailFragment() : Fragment() {
         return binding.root
     }
 
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        setViewPager()
-//    }
-
     fun setViewPager(){
-        viewPager = binding.communityPager.apply {
-            adapter = PagerStateFragmentAdapter(this@CommunityDetailFragment).apply {
-                addFragment(getSummaryFrag())
-                addFragment(getCurriculumFrag())
-                addFragment(getMemberFrag())
-                addFragment(getReviewFrag())
-            }
-
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int){
-                    super.onPageSelected(position)
-//                    Log.e("ViewPagerFragment", "Page ${position+1}")
-                }
-            })
+        viewPager = binding.communityPager
+        viewPager.adapter = PagerStateFragmentAdapter(this@CommunityDetailFragment)
+        with(viewPager.adapter as PagerStateFragmentAdapter) {
+                addFragment(SummaryFragment().apply { arguments = this@CommunityDetailFragment.arguments })
+                addFragment(CurriculumFragment().apply { arguments = this@CommunityDetailFragment.arguments })
+                addFragment(MemberFragment().apply { arguments = this@CommunityDetailFragment.arguments })
+                addFragment(ReviewFragment().apply { arguments = this@CommunityDetailFragment.arguments})
         }
 
         // tablayout attach
         val titles = arrayOf("개요","커리큘럼","구성원","이용후기")
-        TabLayoutMediator(binding!!.communiotyTabLayout, viewPager){ tab, position ->
+        TabLayoutMediator(binding.communiotyTabLayout, viewPager){ tab, position ->
             tab.text = titles[position]
-//            Log.e("tabLog", position.toString())
         }.attach()
-
-//        Log.e("reviewLog", community.reviews[0].toString())
-    }
-
-    fun getSummaryFrag(): Fragment{
-        var frag = DetailFragment().apply {
-            fragTag = "SummaryTag"
-            arguments = this@CommunityDetailFragment.arguments
-            attachLayout(viewUtils.getImageViewWithUrl(community.introduce_img))
-//          이미지 스케일 지정하는 코드      .apply { (this as ImageView).scaleType = imageScaleType })
-            attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule1,false))
-            attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule1_sub,true))
-            attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule2,false))
-            attachLayout(viewUtils.getRuleText(this@CommunityDetailFragment.community.rule2_sub,true))
-            attachLayout(viewUtils.getCenterTextWithBackgroundColor(
-                "${this@CommunityDetailFragment.community.goalTerm}, 여러분은\n${this@CommunityDetailFragment.community.goalName}을 이룰 수 있습니다!",
-                Color.argb(70,255,100,255)
-            ))
-
-            attachLayout(viewUtils.getBlankView(blankHeight))
-        }
-
-        return frag
-    }
-
-    fun getCurriculumFrag(): Fragment{
-        var frag = DetailFragment().apply {
-            fragTag = "CurriculFrag"
-            arguments = this@CommunityDetailFragment.arguments
-            attachLayout(viewUtils.getImageViewWithUrl(community.curriculum_img))
-
-            attachLayout(viewUtils.getBlankView(blankHeight))
-        }
-
-        return frag
-    }
-
-    fun getMemberFrag(): Fragment{
-//        var recyclerView = RecyclerView(mContext).apply {
-//            adapter = MemberRecyclerAdapter(listOf("test"))
-//            layoutManager = LinearLayoutManager(mContext)
-//            layoutParams = RecyclerView.LayoutParams(
-//                RecyclerView.LayoutParams.MATCH_PARENT,
-//                RecyclerView.LayoutParams.WRAP_CONTENT
-//            )
-//        }
-        var frag = DetailFragment().apply {
-            fragTag = "MemberFrag"
-            arguments = this@CommunityDetailFragment.arguments
-            attachLayout(viewUtils.getImageViewWithUrl(community.mentor_img))
-//            attachLayout(recyclerView)
-
-            attachLayout(viewUtils.getBlankView(blankHeight))
-        }
-
-        return frag
-    }
-
-    fun getReviewFrag(): Fragment{
-        var recyclerView = RecyclerView(mContext).apply {
-            adapter = ReviewRecyclerAdapter(community.reviews)
-            layoutManager = LinearLayoutManager(mContext)
-            layoutParams = RecyclerView.LayoutParams(
-                RecyclerView.LayoutParams.MATCH_PARENT,
-                RecyclerView.LayoutParams.WRAP_CONTENT
-                )
-        }
-        var frag = DetailFragment().apply {
-            fragTag = "ReviewFrag"
-            arguments = this@CommunityDetailFragment.arguments
-            attachLayout(TextView(mContext).apply {
-                val str = "Data로 확인하는 수강효과"
-                text = SpannableStringBuilder(str).apply {
-                    setSpan(StyleSpan(Typeface.BOLD), 0, 4,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(RelativeSizeSpan(1.3f),0,4,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(StyleSpan(Typeface.BOLD), 10, 15,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(RelativeSizeSpan(1.3f),10,15,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(BackgroundColorSpan(Color.parseColor("#E2C9FF")), 0, str.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                textSize = 19f
-                setTextColor(Color.BLACK)
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                    setMargins(100,30,10,10)
-                }
-            })
-            attachLayout(viewUtils.getPercentTextView("완강률",100))
-            attachLayout(viewUtils.getPercentTextView("목표달성률",100))
-            attachLayout(viewUtils.getPercentTextView("만족도",100))
-            attachLayout(TextView(mContext).apply {
-                val str = "Review로 확인하는 수강효과"
-                text = SpannableStringBuilder(str).apply {
-                    setSpan(StyleSpan(Typeface.BOLD), 0, 6,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(RelativeSizeSpan(1.3f),0,6,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(StyleSpan(Typeface.BOLD), 13, 17,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(RelativeSizeSpan(1.3f),13,17,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(BackgroundColorSpan(Color.parseColor("#E2C9FF")), 0, str.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                textSize = 19f
-                setTextColor(Color.BLACK)
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                    setMargins(100,30,10,10)                }
-            })
-            attachLayout(recyclerView)
-
-            attachLayout(viewUtils.getBlankView(blankHeight))
-        }
-
-        return frag
     }
 
     override fun onStop() {
         super.onStop()
         binding.communityPager.adapter = null
+    }
+
+    class PagerStateFragmentAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
+        var fragments : ArrayList<Fragment> = ArrayList()
+
+        override fun getItemCount(): Int {
+            return fragments.size
+        }
+
+        override fun createFragment(position: Int): Fragment {
+            return fragments[position]
+        }
+
+        fun addFragment(fragment: Fragment){
+            fragments.add(fragment)
+        }
+
+        fun removeLastFragment(){
+            fragments.removeLast()
+        }
     }
 }

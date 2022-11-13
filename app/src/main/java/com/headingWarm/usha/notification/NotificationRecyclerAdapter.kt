@@ -8,37 +8,33 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.headingWarm.usha.R
 import com.headingWarm.usha.databinding.NotificationItemBinding
+import java.util.zip.Inflater
 
-class NotificationRecyclerAdapter(val viewModel: NotificationViewModel)
+class NotificationRecyclerAdapter(var item: MutableList<Int>)
     : RecyclerView.Adapter<NotificationRecyclerAdapter.NotificationRecyclerViewHolder>() {
 
-    init {
-        // for test
-        if(viewModel.item.isEmpty()) viewModel.item.add(1)
+    fun refreshItem(item: MutableList<Int>){
+        this.item = item
+        this.notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): NotificationRecyclerViewHolder {
-        var binding = DataBindingUtil.inflate<NotificationItemBinding>(
-            LayoutInflater.from(parent.context), R.layout.notification_item,parent,false)
+        var binding = NotificationItemBinding.inflate(LayoutInflater.from(parent.context))
         return NotificationRecyclerViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: NotificationRecyclerViewHolder, position: Int) {
-        Log.e("binding","notiRecycler B")
+        holder.bind()
     }
 
     override fun getItemCount(): Int {
-        return viewModel.item.size
+        return item.size
     }
 
     class NotificationRecyclerViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bind(){
-
-        }
-
+        fun bind(){}
     }
 }

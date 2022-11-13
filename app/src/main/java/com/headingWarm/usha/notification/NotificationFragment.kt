@@ -22,10 +22,9 @@ class NotificationFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         viewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
-        adapter = NotificationRecyclerAdapter(viewModel)
-        binding = DataBindingUtil.inflate<FragmentNotificationBinding?>(inflater,R.layout.fragment_notification,container,false).apply {
-            this.viewModel = this@NotificationFragment.viewModel
-            notificationRecyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = NotificationRecyclerAdapter(viewModel.item)
+        binding = DataBindingUtil.inflate<FragmentNotificationBinding>(inflater,R.layout.fragment_notification,container,false).apply {
+            viewModel = this@NotificationFragment.viewModel
             notificationRecyclerView.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
             notificationRecyclerView.adapter = this@NotificationFragment.adapter
         }

@@ -1,4 +1,4 @@
-package com.headingWarm.usha.community.model_community
+package com.headingWarm.usha.community.item_community
 
 data class Review(
     val _id: String,
