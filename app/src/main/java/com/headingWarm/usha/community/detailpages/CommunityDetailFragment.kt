@@ -74,8 +74,8 @@ class CommunityDetailFragment() : Fragment() {
         viewPager.adapter = PagerStateFragmentAdapter(this@CommunityDetailFragment)
         with(viewPager.adapter as PagerStateFragmentAdapter) {
                 addFragment(SummaryFragment().apply { arguments = this@CommunityDetailFragment.arguments })
-                addFragment(getCurriculumFrag())
-                addFragment(getMemberFrag())
+                addFragment(CurriculumFragment().apply { arguments = this@CommunityDetailFragment.arguments })
+                addFragment(MemberFragment().apply { arguments = this@CommunityDetailFragment.arguments })
                 addFragment(getReviewFrag())
         }
 
@@ -84,29 +84,6 @@ class CommunityDetailFragment() : Fragment() {
         TabLayoutMediator(binding.communiotyTabLayout, viewPager){ tab, position ->
             tab.text = titles[position]
         }.attach()
-    }
-
-    fun getCurriculumFrag(): Fragment{
-        var frag = DetailFragment().apply {
-            fragTag = "CurriculFrag"
-            arguments = this@CommunityDetailFragment.arguments
-            attachLayout(viewUtils.getImageViewWithUrl(community.curriculum_img))
-
-            attachLayout(viewUtils.getBlankView(blankHeight))
-        }
-
-        return frag
-    }
-
-    fun getMemberFrag(): Fragment{
-        var frag = DetailFragment().apply {
-            fragTag = "MemberFrag"
-            arguments = this@CommunityDetailFragment.arguments
-            attachLayout(viewUtils.getImageViewWithUrl(community.mentor_img))
-            attachLayout(viewUtils.getBlankView(blankHeight))
-        }
-
-        return frag
     }
 
     fun getReviewFrag(): Fragment{

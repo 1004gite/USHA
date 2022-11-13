@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.headingWarm.usha.community.detailpages.viewpagers.CurriculumFragment.FragmentCurriculumViewModel" />
+            type="com.headingWarm.usha.community.detailpages.viewpagers.MemberFragment.FragmentMemberViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
