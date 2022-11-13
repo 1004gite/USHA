@@ -8,12 +8,11 @@ import com.headingWarm.usha.R
 import com.headingWarm.usha.community.item_community.Review
 import com.headingWarm.usha.databinding.ItemReviewBinding
 
-class ReviewRecyclerAdapter(val reviews: List<Review>): RecyclerView.Adapter<ReviewViewHolder>() {
+class ReviewRecyclerAdapter(val reviews: List<Review>): RecyclerView.Adapter<ReviewRecyclerAdapter.ReviewViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
-        val binding = DataBindingUtil.inflate<ItemReviewBinding>(LayoutInflater.from(parent.context), R.layout.item_review, parent, false)
-
+        val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context))
         return ReviewViewHolder(binding)
     }
 
@@ -25,11 +24,9 @@ class ReviewRecyclerAdapter(val reviews: List<Review>): RecyclerView.Adapter<Rev
         return reviews.size
     }
 
-
-}
-
-class ReviewViewHolder(var binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bindReview(review: Review){
-        binding.review = review
+    class ReviewViewHolder(var binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bindReview(review: Review) {
+            binding.review = review
+        }
     }
 }

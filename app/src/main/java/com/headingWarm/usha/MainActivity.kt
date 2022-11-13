@@ -1,6 +1,7 @@
 package com.headingWarm.usha
 
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -30,36 +31,36 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
-    private var binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityMainBinding
     val dialogUtils = DialogUtils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding!!.lifecycleOwner = this
+        binding.lifecycleOwner = this
 
         // fragment controller 설정
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
-        navController.addOnDestinationChangedListener(object: NavController.OnDestinationChangedListener{
-            override fun onDestinationChanged(
-                controller: NavController,
-                destination: NavDestination,
-                arguments: Bundle?
-            ) {
-                Log.e("backQueueLog","=======")
-                for(entry in controller.backQueue) Log.e("backQueue", entry.destination.displayName)
-//                Log.e("backStackEntry","======")
-//                controller.currentBackStackEntry?.destination?.let { Log.e("CurrentBackStackEntry", it.displayName) }
-//                controller.previousBackStackEntry?.destination?.let { Log.e("PreviousBackStackEntry", it.displayName) }
-            }
-
-        })
+//        navController.addOnDestinationChangedListener(object: NavController.OnDestinationChangedListener{
+//            override fun onDestinationChanged(
+//                controller: NavController,
+//                destination: NavDestination,
+//                arguments: Bundle?
+//            ) {
+//                Log.e("backQueueLog","=======")
+//                for(entry in controller.backQueue) Log.e("backQueue", entry.destination.displayName)
+////                Log.e("backStackEntry","======")
+////                controller.currentBackStackEntry?.destination?.let { Log.e("CurrentBackStackEntry", it.displayName) }
+////                controller.previousBackStackEntry?.destination?.let { Log.e("PreviousBackStackEntry", it.displayName) }
+//            }
+//
+//        })
         MyApplication.toastPublisher = PublishSubject.create<String?>().apply {
             subscribe { Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT).show() }
         }
 
-        binding!!.bottomNavView.setupWithNavController(navController)
+        binding.bottomNavView.setupWithNavController(navController)
         checkLoginInfo()
     }
 
@@ -100,6 +101,11 @@ class MainActivity : AppCompatActivity() {
                 .subscribe {
                     imageView.setImageBitmap(it)
                 }
+        }
+        @JvmStatic
+        @BindingAdapter("bitmapForImageView")
+        fun setImage(imageView: ImageView, bitmap: Bitmap?){
+            bitmap?.let { imageView.setImageBitmap(it) }
         }
 
         @JvmStatic

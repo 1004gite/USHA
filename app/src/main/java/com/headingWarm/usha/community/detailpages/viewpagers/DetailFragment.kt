@@ -26,16 +26,15 @@ class DetailFragment() : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         setVariables()
-        binding = DataBindingUtil.inflate<FragmentDetailBinding?>(inflater,R.layout.fragment_detail,container,false).apply {
+        binding = FragmentDetailBinding.inflate(inflater).apply {
             for(view in viewList){
                 detailLinearLayout.addView(view)
             }
-//            recyclerView?.let { it.layoutManager = LinearLayoutManager(context) }
             setFloatingBtnListener(floatingBtnJoin)
         }
-        return binding!!.root
+        return binding.root
     }
 
     fun setVariables(){
@@ -66,7 +65,7 @@ class DetailFragment() : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        viewList.stream().forEach { (it.parent as ViewGroup).removeView(it) }
+        viewList.forEach { (it.parent as ViewGroup).removeView(it) }
     }
 
 }

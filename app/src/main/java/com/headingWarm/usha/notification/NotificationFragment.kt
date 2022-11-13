@@ -22,10 +22,9 @@ class NotificationFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         viewModel = ViewModelProvider(this).get(NotificationViewModel::class.java)
-        val testItem = mutableListOf<Int>().apply { add(1) }
-        adapter = NotificationRecyclerAdapter(testItem)
-        binding = DataBindingUtil.inflate<FragmentNotificationBinding?>(inflater,R.layout.fragment_notification,container,false).apply {
-            this.viewModel = this@NotificationFragment.viewModel
+        adapter = NotificationRecyclerAdapter(viewModel.item)
+        binding = DataBindingUtil.inflate<FragmentNotificationBinding>(inflater,R.layout.fragment_notification,container,false).apply {
+            viewModel = this@NotificationFragment.viewModel
             notificationRecyclerView.addItemDecoration(DividerItemDecoration(context,DividerItemDecoration.VERTICAL))
             notificationRecyclerView.adapter = this@NotificationFragment.adapter
         }
