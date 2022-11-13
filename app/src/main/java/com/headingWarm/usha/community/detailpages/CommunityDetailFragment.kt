@@ -42,7 +42,6 @@ class CommunityDetailFragment() : Fragment() {
     private lateinit var viewPager: ViewPager2
     private lateinit var mContext: Context
     private lateinit var viewUtils: ViewUtils
-    private var blankHeight = 500
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -76,7 +75,7 @@ class CommunityDetailFragment() : Fragment() {
                 addFragment(SummaryFragment().apply { arguments = this@CommunityDetailFragment.arguments })
                 addFragment(CurriculumFragment().apply { arguments = this@CommunityDetailFragment.arguments })
                 addFragment(MemberFragment().apply { arguments = this@CommunityDetailFragment.arguments })
-                addFragment(getReviewFrag())
+                addFragment(ReviewFragment().apply { arguments = this@CommunityDetailFragment.arguments})
         }
 
         // tablayout attach
@@ -84,58 +83,6 @@ class CommunityDetailFragment() : Fragment() {
         TabLayoutMediator(binding.communiotyTabLayout, viewPager){ tab, position ->
             tab.text = titles[position]
         }.attach()
-    }
-
-    fun getReviewFrag(): Fragment{
-        var recyclerView = RecyclerView(mContext).apply {
-            adapter = ReviewRecyclerAdapter(community.reviews)
-            layoutManager = LinearLayoutManager(mContext)
-            layoutParams = RecyclerView.LayoutParams(
-                RecyclerView.LayoutParams.MATCH_PARENT,
-                RecyclerView.LayoutParams.WRAP_CONTENT
-                )
-        }
-        var frag = DetailFragment().apply {
-            fragTag = "ReviewFrag"
-            arguments = this@CommunityDetailFragment.arguments
-            attachLayout(TextView(mContext).apply {
-                val str = "Data로 확인하는 수강효과"
-                text = SpannableStringBuilder(str).apply {
-                    setSpan(StyleSpan(Typeface.BOLD), 0, 4,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(RelativeSizeSpan(1.3f),0,4,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(StyleSpan(Typeface.BOLD), 10, 15,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(RelativeSizeSpan(1.3f),10,15,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(BackgroundColorSpan(Color.parseColor("#E2C9FF")), 0, str.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                textSize = 19f
-                setTextColor(Color.BLACK)
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                    setMargins(100,30,10,10)
-                }
-            })
-            attachLayout(viewUtils.getPercentTextView("완강률",100))
-            attachLayout(viewUtils.getPercentTextView("목표달성률",100))
-            attachLayout(viewUtils.getPercentTextView("만족도",100))
-            attachLayout(TextView(mContext).apply {
-                val str = "Review로 확인하는 수강효과"
-                text = SpannableStringBuilder(str).apply {
-                    setSpan(StyleSpan(Typeface.BOLD), 0, 6,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(RelativeSizeSpan(1.3f),0,6,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(StyleSpan(Typeface.BOLD), 13, 17,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(RelativeSizeSpan(1.3f),13,17,Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                    setSpan(BackgroundColorSpan(Color.parseColor("#E2C9FF")), 0, str.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-                textSize = 19f
-                setTextColor(Color.BLACK)
-                layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply {
-                    setMargins(100,30,10,10)                }
-            })
-            attachLayout(recyclerView)
-
-            attachLayout(viewUtils.getBlankView(blankHeight))
-        }
-
-        return frag
     }
 
     override fun onStop() {
