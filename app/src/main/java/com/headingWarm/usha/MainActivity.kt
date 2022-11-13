@@ -24,6 +24,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.PublishSubject
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +33,6 @@ import java.net.URL
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    val dialogUtils = DialogUtils()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,20 +42,6 @@ class MainActivity : AppCompatActivity() {
         // fragment controller 설정
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
-//        navController.addOnDestinationChangedListener(object: NavController.OnDestinationChangedListener{
-//            override fun onDestinationChanged(
-//                controller: NavController,
-//                destination: NavDestination,
-//                arguments: Bundle?
-//            ) {
-//                Log.e("backQueueLog","=======")
-//                for(entry in controller.backQueue) Log.e("backQueue", entry.destination.displayName)
-////                Log.e("backStackEntry","======")
-////                controller.currentBackStackEntry?.destination?.let { Log.e("CurrentBackStackEntry", it.displayName) }
-////                controller.previousBackStackEntry?.destination?.let { Log.e("PreviousBackStackEntry", it.displayName) }
-//            }
-//
-//        })
         MyApplication.toastPublisher = PublishSubject.create<String?>().apply {
             subscribe { Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT).show() }
         }
@@ -88,19 +74,11 @@ class MainActivity : AppCompatActivity() {
         @JvmStatic
         @BindingAdapter("imageViewSrcUri")
         fun setImage(imageView: ImageView, uriString: String){
-            // subscribeOn -> 스트림 액션이 끝난 후 다음 스트림으로 옮길 스케쥴러를 설정한다.
-            // observeOn -> 설정 이후 스트림의 액션을 수행할 스케쥴러를 지정한다.
-            Observable.just(uriString)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map {
-                    var iStream = URL(uriString).openStream()
-                    BitmapFactory.decodeStream(iStream)
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    imageView.setImageBitmap(it)
-                }
+            val stream = CoroutineScope(Dispatchers.IO).async { URL(uriString).openStream() }
+            CoroutineScope(Dispatchers.Default).launch {
+                val bmp = BitmapFactory.decodeStream(stream.await())
+                withContext(Dispatchers.Main){ imageView.setImageBitmap(bmp) }
+            }
         }
         @JvmStatic
         @BindingAdapter("bitmapForImageView")

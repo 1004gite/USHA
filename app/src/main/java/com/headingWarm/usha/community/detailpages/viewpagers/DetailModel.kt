@@ -11,23 +11,21 @@ import com.headingWarm.usha.community.item_community.Community
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.*
 import java.net.URL
 
 open class DetailModel(val community: Community, val displayWidth: Int, val navController: NavController){
     val image = MutableLiveData<Bitmap>()
 
     fun setBitmap(url: String){
-        Observable.just(url)
-            .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
-            .map {
-                var iStream = URL(url).openStream()
-                var bmp = BitmapFactory.decodeStream(iStream)
-                var height = (displayWidth.toFloat()/bmp.width.toFloat())*bmp.height
-                Bitmap.createScaledBitmap(bmp,displayWidth, height.toInt(),false)
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {image.value = it}
+        val stream = CoroutineScope(Dispatchers.IO).async {URL(url).openStream() }
+        CoroutineScope(Dispatchers.Default).launch{
+            var bmp = BitmapFactory.decodeStream(stream.await())
+            val height = (displayWidth.toFloat()/bmp.width.toFloat())*bmp.height
+            bmp = Bitmap.createScaledBitmap(bmp,displayWidth, height.toInt(),false)
+
+            withContext(Dispatchers.Main){ image.value = bmp }
+        }
     }
 
     fun clickFloatingBtn(){

@@ -40,20 +40,12 @@ class CommunityDetailFragment() : Fragment() {
     private lateinit var community: Community
     private lateinit var navController: NavController
     private lateinit var viewPager: ViewPager2
-    private lateinit var mContext: Context
-    private lateinit var viewUtils: ViewUtils
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        mContext = context
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         community = arguments?.getSerializable("community") as Community
-        viewUtils = ViewUtils(mContext)
         navController = findNavController()
         binding = FragmentCommunityDetailBinding.inflate(inflater).apply {
             lifecycleOwner = this@CommunityDetailFragment
