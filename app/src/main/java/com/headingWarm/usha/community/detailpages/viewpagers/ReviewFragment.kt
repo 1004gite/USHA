@@ -53,7 +53,6 @@ class ReviewFragment : Fragment() {
     }
 
     class FragmentReviewViewModel(val model: DetailModel) : ViewModel() {
-        val image: LiveData<Bitmap> get() = model.image
         val spannableStr1 = with("Data로 확인하는 수강효과") {
             SpannableStringBuilder(this).apply {
                 setSpan(StyleSpan(Typeface.BOLD), 0, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)

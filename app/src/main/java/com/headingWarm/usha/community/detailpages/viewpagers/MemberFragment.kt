@@ -15,6 +15,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.headingWarm.usha.MyApplication
 import com.headingWarm.usha.R
+import com.headingWarm.usha.community.detailpages.CommunityDetailFragment
 import com.headingWarm.usha.community.item_community.Community
 import com.headingWarm.usha.databinding.FragmentMemberBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -36,8 +37,7 @@ class MemberFragment: Fragment() {
         binding = FragmentMemberBinding.inflate(inflater).apply {
             lifecycleOwner = this@MemberFragment
             viewModel = ViewModelProvider(this@MemberFragment,
-                FragmentMemberViewModel.FragmentMemberVMFac(DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController())
-                    .apply { setBitmap(community.mentor_img) }
+                FragmentMemberViewModel.FragmentMemberVMFac(DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController()).apply { setBitmap(community.mentor_img) }
                 )).get(FragmentMemberViewModel::class.java)
         }
         return binding.root

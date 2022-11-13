@@ -35,8 +35,7 @@ class SummaryFragment: Fragment() {
             lifecycleOwner = this@SummaryFragment
             viewModel = ViewModelProvider(this@SummaryFragment,
                 FragmentSummaryViewModel.FragmentSummaryVMFac(
-                    DetailModel(this@SummaryFragment.community!!,resources.displayMetrics.widthPixels,  findNavController())
-                        .apply { setBitmap(community.introduce_img) })
+                    DetailModel(this@SummaryFragment.community!!,resources.displayMetrics.widthPixels,  findNavController()).apply { setBitmap(community.introduce_img) })
             ).get(FragmentSummaryViewModel::class.java)
         }
         return binding.root

@@ -38,9 +38,7 @@ class CurriculumFragment: Fragment() {
             viewModel = ViewModelProvider(
                 this@CurriculumFragment,
                 FragmentCurriculumViewModel.FragmentCurriculumVMFac(
-                    DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController())
-                        .apply { setBitmap(community.curriculum_img) }
-                )
+                    DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController()).apply{setBitmap(community.curriculum_img)})
             ).get(FragmentCurriculumViewModel::class.java)
         }
         return binding.root
