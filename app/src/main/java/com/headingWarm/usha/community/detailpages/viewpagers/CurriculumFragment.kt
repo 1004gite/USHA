@@ -38,7 +38,8 @@ class CurriculumFragment: Fragment() {
             viewModel = ViewModelProvider(
                 this@CurriculumFragment,
                 FragmentCurriculumViewModel.FragmentCurriculumVMFac(
-                    FragmentCurriculumModel(resources.displayMetrics.widthPixels, community!!, findNavController())
+                    DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController())
+                        .apply { setBitmap(community.curriculum_img) }
                 )
             ).get(FragmentCurriculumViewModel::class.java)
         }
@@ -46,7 +47,7 @@ class CurriculumFragment: Fragment() {
     }
 
 
-    class FragmentCurriculumViewModel(val model: FragmentCurriculumModel): ViewModel(){
+    class FragmentCurriculumViewModel(val model: DetailModel): ViewModel(){
 
         val image: LiveData<Bitmap> get() = model.image
 
@@ -54,48 +55,11 @@ class CurriculumFragment: Fragment() {
             model.clickFloatingBtn()
         }
 
-        class FragmentCurriculumVMFac(val model: FragmentCurriculumModel): ViewModelProvider.Factory{
+        class FragmentCurriculumVMFac(val model: DetailModel): ViewModelProvider.Factory{
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return FragmentCurriculumViewModel(model) as T
             }
         }
 
-    }
-
-
-    class FragmentCurriculumModel(val displayWidth: Int, val community: Community, val navController: NavController){
-        var image = MutableLiveData<Bitmap>()
-
-        init {
-            setBitmap(image,community.curriculum_img)
-        }
-
-        fun setBitmap(imgData:MutableLiveData<Bitmap>, url: String){
-            Observable.just(url)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map {
-                    var iStream = URL(url).openStream()
-                    var bmp = BitmapFactory.decodeStream(iStream)
-                    var height = (displayWidth.toFloat()/bmp.width.toFloat())*bmp.height
-                    Bitmap.createScaledBitmap(bmp,displayWidth, height.toInt(),false)
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {imgData.value = it}
-        }
-
-        fun clickFloatingBtn(){
-            if(MyApplication.loginInfo.loginned){
-                // 로그인 되어 있으면 가입 페이지로 보낸다.
-                val bundle = Bundle().apply {
-                    putSerializable("community",community)
-                }
-                navController.navigate(R.id.reservation, bundle)
-            }
-            else{
-                // 로그인 안되어 있으면 로그인 페이지로 보낸다.
-                navController.navigate(R.id.loginMain)
-            }
-        }
     }
 }

@@ -29,19 +29,20 @@ class SummaryFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         community = arguments?.getSerializable("community") as Community
         binding = FragmentSummaryBinding.inflate(inflater).apply {
             lifecycleOwner = this@SummaryFragment
             viewModel = ViewModelProvider(this@SummaryFragment,
                 FragmentSummaryViewModel.FragmentSummaryVMFac(
-                    FragmentSummaryModel(resources.displayMetrics.widthPixels, this@SummaryFragment.community!!, findNavController()))
+                    DetailModel(this@SummaryFragment.community!!,resources.displayMetrics.widthPixels,  findNavController())
+                        .apply { setBitmap(community.introduce_img) })
             ).get(FragmentSummaryViewModel::class.java)
         }
         return binding.root
     }
 
-    class FragmentSummaryViewModel(val model: FragmentSummaryModel): ViewModel(){
+    class FragmentSummaryViewModel(val model: DetailModel): ViewModel(){
         val community = model.community
         val image: LiveData<Bitmap> get() = model.image
         val textCenter = "${community.goalTerm}, 여러분은\n${community.goalName}을 이룰 수 있습니다!"
@@ -50,48 +51,10 @@ class SummaryFragment: Fragment() {
             model.clickFloatingBtn()
         }
 
-        class FragmentSummaryVMFac(val model: FragmentSummaryModel): ViewModelProvider.Factory{
+        class FragmentSummaryVMFac(val model: DetailModel): ViewModelProvider.Factory{
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return FragmentSummaryViewModel(model) as T
             }
-        }
-
-    }
-
-
-    class FragmentSummaryModel(val displayWidth: Int, val community: Community, val navController: NavController){
-        var image = MutableLiveData<Bitmap>()
-
-        init {
-            setBitmap(community.introduce_img)
-        }
-
-        fun setBitmap(url: String){
-            Observable.just(url)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map {
-                    var iStream = URL(url).openStream()
-                    var bmp = BitmapFactory.decodeStream(iStream)
-                    var height = (displayWidth.toFloat()/bmp.width.toFloat())*bmp.height
-                    Bitmap.createScaledBitmap(bmp,displayWidth, height.toInt(),false)
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {image.value = it}
-        }
-
-        fun clickFloatingBtn(){
-                if(MyApplication.loginInfo.loginned){
-                    // 로그인 되어 있으면 가입 페이지로 보낸다.
-                    val bundle = Bundle().apply {
-                        putSerializable("community",community)
-                    }
-                    navController.navigate(R.id.reservation, bundle)
-                }
-                else{
-                    // 로그인 안되어 있으면 로그인 페이지로 보낸다.
-                    navController.navigate(R.id.loginMain)
-                }
         }
     }
 }

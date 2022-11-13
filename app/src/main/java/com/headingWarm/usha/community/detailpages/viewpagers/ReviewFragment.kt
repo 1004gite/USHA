@@ -44,7 +44,7 @@ class ReviewFragment : Fragment() {
         binding = FragmentReviewBinding.inflate(inflater).apply {
             lifecycleOwner = this@ReviewFragment
             viewModel = ViewModelProvider(this@ReviewFragment,
-                    FragmentReviewViewModel.FragmentReviewVMfac(FragmentReviewModel(community!!, resources.displayMetrics.widthPixels, findNavController()))
+                    FragmentReviewViewModel.FragmentReviewVMfac(DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController()))
                 ).get(FragmentReviewViewModel::class.java)
             reviewRecyclerView.adapter = ReviewRecyclerAdapter(community!!.reviews)
         }
@@ -52,7 +52,7 @@ class ReviewFragment : Fragment() {
         return binding.root
     }
 
-    class FragmentReviewViewModel(val model: FragmentReviewModel) : ViewModel() {
+    class FragmentReviewViewModel(val model: DetailModel) : ViewModel() {
         val image: LiveData<Bitmap> get() = model.image
         val spannableStr1 = with("Data로 확인하는 수강효과") {
             SpannableStringBuilder(this).apply {
@@ -80,46 +80,11 @@ class ReviewFragment : Fragment() {
             model.clickFloatingBtn()
         }
 
-        class FragmentReviewVMfac(val model: FragmentReviewModel): ViewModelProvider.Factory{
+        class FragmentReviewVMfac(val model: DetailModel): ViewModelProvider.Factory{
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 return FragmentReviewViewModel(model) as T
             }
         }
 
-    }
-
-    class FragmentReviewModel(val community: Community, val displayWidth: Int, val navController: NavController) {
-        var image = MutableLiveData<Bitmap>()
-
-        init {
-            setBitmap(community.introduce_img)
-        }
-
-        fun setBitmap(url: String) {
-            Observable.just(url)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map {
-                    var iStream = URL(url).openStream()
-                    var bmp = BitmapFactory.decodeStream(iStream)
-                    var height = (displayWidth.toFloat() / bmp.width.toFloat()) * bmp.height
-                    Bitmap.createScaledBitmap(bmp, displayWidth, height.toInt(), false)
-                }
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { image.value = it }
-        }
-
-        fun clickFloatingBtn() {
-            if (MyApplication.loginInfo.loginned) {
-                // 로그인 되어 있으면 가입 페이지로 보낸다.
-                val bundle = Bundle().apply {
-                    putSerializable("community", community)
-                }
-                navController.navigate(R.id.reservation, bundle)
-            } else {
-                // 로그인 안되어 있으면 로그인 페이지로 보낸다.
-                navController.navigate(R.id.loginMain)
-            }
-        }
     }
 }
