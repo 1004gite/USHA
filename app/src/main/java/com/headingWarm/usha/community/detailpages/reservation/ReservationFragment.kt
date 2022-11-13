@@ -30,22 +30,19 @@ class ReservationFragment : Fragment() {
         val ableTintList = ResourcesCompat.getColorStateList(resources,R.color.ableBtnColor,null)
         val disableTintList = ResourcesCompat.getColorStateList(resources,R.color.disableBtnColor,null)
         viewModel = ViewModelProvider(this,
-            ReservationViewModel.ReservationViewModelFactory(
+            ReservationViewModel.ReservationViewModelFactory(ReservationModel(
                 mCommunity,
-                DialogUtils().getWebViewDialog(
-                    requireContext(),
-                    "https://www.headingwarm.com/term"
-                ),
+                DialogUtils().getWebViewDialog(requireContext(), "https://www.headingwarm.com/term"),
                 ableTintList!!,
                 disableTintList!!,
-                findNavController()
+                findNavController())
             )
         ).get(ReservationViewModel::class.java)
         binding = DataBindingUtil.inflate<FragmentReservationBinding?>(inflater,R.layout.fragment_reservation,container,false).apply {
             lifecycleOwner = this@ReservationFragment
             viewModel = this@ReservationFragment.viewModel
         }
-        return binding!!.root
+        return binding.root
     }
 
 }
