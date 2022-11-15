@@ -18,9 +18,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ReviewRecyclerAdapter(val reviews: List<Review>, val communityId: String) :
-    RecyclerView.Adapter<ReviewRecyclerAdapter.ReviewViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if(viewType == 0) return EmptyViewHolder(View(parent.context).apply { minimumHeight = 300 })
+
         val binding = ItemReviewBinding.inflate(LayoutInflater.from(parent.context))
         val vh = ReviewViewHolder(binding)
         binding.root.setOnLongClickListener { v ->
@@ -30,12 +32,22 @@ class ReviewRecyclerAdapter(val reviews: List<Review>, val communityId: String) 
         return vh
     }
 
-    override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
-        holder.bindReview(reviews[position])
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if( holder is ReviewViewHolder ) (holder as ReviewViewHolder).bindReview(reviews[position])
     }
 
     override fun getItemCount(): Int {
-        return reviews.size
+        // 마지막에 빈 공산을 넣기 위함
+        return reviews.size+1
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if(position == reviews.size) return 0
+        return 1
+    }
+
+    class EmptyViewHolder(v: View):RecyclerView.ViewHolder(v){
+
     }
 
     class ReviewViewHolder(var binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root) {
