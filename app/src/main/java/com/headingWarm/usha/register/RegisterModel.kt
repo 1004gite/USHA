@@ -36,22 +36,22 @@ class RegisterModel(val navController: NavController) {
     val registerClickable: LiveData<Boolean> = combine(termCheck.asFlow(),insertCheck.asFlow()){
         a,b -> a&&b }.asLiveData()
 
-    fun checkForRegis(): Boolean{
-        if(insertCheck.value != true){
-            MyApplication.toastPublisher.onNext("모든 항목을 입력해 주세요!")
-            return false
-        }
-        if(pw.value != pw2.value){
-            // 비밀번호 다름
-            MyApplication.toastPublisher.onNext("비밀번호가 다릅니다.")
-            return false
-        }
-        if(termCheck.value != true){
-            MyApplication.toastPublisher.onNext("약관에 동의해주세요.")
-            return false
-        }
-        return true
-    }
+//    fun checkForRegis(): Boolean{
+//        if(insertCheck.value != true){
+//            MyApplication.showToast("모든 항목을 입력해 주세요!")
+//            return false
+//        }
+//        if(pw.value != pw2.value){
+//            // 비밀번호 다름
+//            MyApplication.showToast("비밀번호가 다릅니다.")
+//            return false
+//        }
+//        if(termCheck.value != true){
+//            MyApplication.showToast("약관에 동의해주세요.")
+//            return false
+//        }
+//        return true
+//    }
 
     fun regis(){
         // 가입 후 로그인 main페이지로
@@ -63,7 +63,7 @@ class RegisterModel(val navController: NavController) {
                 navController.popBackStack()
             }
             override fun onFailure(call: Call<Any>, t: Throwable) {
-                MyApplication.toastPublisher.onNext("가입 실패")
+                MyApplication.showToast("가입 실패")
             }
         })
     }

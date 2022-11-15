@@ -1,7 +1,5 @@
 package com.headingWarm.usha.community.detailpages.viewpagers
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -15,25 +13,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.headingWarm.usha.MyApplication
-import com.headingWarm.usha.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.headingWarm.usha.community.item_community.Community
 import com.headingWarm.usha.databinding.FragmentReviewBinding
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
-import java.net.URL
 
 class ReviewFragment : Fragment() {
 
     lateinit var binding: FragmentReviewBinding
     var community: Community? = null
+//    lateinit var recyclerViewAdapter: ReviewRecyclerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,12 +32,13 @@ class ReviewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         community = arguments?.getSerializable("community") as Community?
+//        recyclerViewAdapter = ReviewRecyclerAdapter(community!!.reviews, community!!._id)
         binding = FragmentReviewBinding.inflate(inflater).apply {
             lifecycleOwner = this@ReviewFragment
             viewModel = ViewModelProvider(this@ReviewFragment,
                     FragmentReviewViewModel.FragmentReviewVMfac(DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController()))
                 ).get(FragmentReviewViewModel::class.java)
-            reviewRecyclerView.adapter = ReviewRecyclerAdapter(community!!.reviews)
+            reviewRecyclerView.adapter = ReviewRecyclerAdapter(community!!.reviews, community!!._id)
         }
 
         return binding.root

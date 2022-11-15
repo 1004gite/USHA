@@ -66,7 +66,7 @@ public class SettingFragment extends Fragment {
         //링크복사
         binding.CopyBtn.setOnClickListener(view3 -> {
             clipboardManager.setPrimaryClip(ClipData.newPlainText("copyText","https://www.headingwarm.com"));
-            MyApplication.toastPublisher.onNext("링크가 클립보드에 복사되었습니다.");
+            MyApplication.showToast("링크가 클립보드에 복사되었습니다.");
         });
         binding.btnLogout.setOnClickListener((btn) -> {
             AlertDialog alertD = new AlertDialog.Builder(context)
@@ -100,7 +100,7 @@ public class SettingFragment extends Fragment {
 
                             @Override
                             public void onFailure(Call<Object> call, Throwable t) {
-                                MyApplication.toastPublisher.onNext("회원탈퇴 실패");
+                                MyApplication.showToast("회원탈퇴 실패");
                             }
                         });
                     }))

@@ -77,11 +77,6 @@ class CommunityDetailFragment() : Fragment() {
         }.attach()
     }
 
-    override fun onStop() {
-        super.onStop()
-        binding.communityPager.adapter = null
-    }
-
     class PagerStateFragmentAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
         var fragments : ArrayList<Fragment> = ArrayList()
 

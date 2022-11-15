@@ -3,7 +3,7 @@ package com.headingWarm.usha
 import android.app.Application
 import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-import io.reactivex.rxjava3.subjects.PublishSubject
+import androidx.lifecycle.MutableLiveData
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -13,6 +13,12 @@ class MyApplication : Application() {
         lateinit var prefs: PrefsManager
         lateinit var loginInfo: LoginInfo
         lateinit var retrofit: Retrofit
+        var toastString: MutableLiveData<String> = MutableLiveData<String>()
+
+        @JvmStatic
+        fun showToast(str: String){
+            toastString.value = str
+        }
 
         @JvmStatic
         fun logoutFunc(): Boolean {
@@ -20,8 +26,6 @@ class MyApplication : Application() {
             prefs.setString(Consts.token, "no")
             return loginInfo.loginned
         }
-
-        lateinit var toastPublisher: PublishSubject<String>
     }
 
     override fun onCreate() {

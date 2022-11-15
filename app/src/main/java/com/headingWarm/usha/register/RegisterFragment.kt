@@ -1,19 +1,16 @@
 package com.headingWarm.usha.register
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.headingWarm.usha.R
 import com.headingWarm.usha.databinding.FragmentRegisterBinding
 import com.headingWarm.usha.dialogUtils.DialogUtils
-import io.reactivex.rxjava3.subjects.PublishSubject
 
 class RegisterFragment : Fragment() {
 

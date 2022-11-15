@@ -5,25 +5,17 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.headingWarm.usha.databinding.ActivityMainBinding
-import com.headingWarm.usha.dialogUtils.DialogUtils
 import com.headingWarm.usha.logins.login.model.LoginApiInterface
 import com.headingWarm.usha.logins.login.model.LoginBody
 import com.headingWarm.usha.logins.login.model.LoginResult
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
-import io.reactivex.rxjava3.subjects.PublishSubject
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -42,8 +34,10 @@ class MainActivity : AppCompatActivity() {
         // fragment controller 설정
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
-        MyApplication.toastPublisher = PublishSubject.create<String?>().apply {
-            subscribe { Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT).show() }
+
+        // Toast메세지는 여기서만 받는다.
+        MyApplication.toastString.observe(this){
+            Toast.makeText(applicationContext, it, Toast.LENGTH_SHORT).show()
         }
 
         binding.bottomNavView.setupWithNavController(navController)
@@ -58,12 +52,13 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
                 if(response.body() == null){
                     // 로그인 실패
+                    MyApplication.showToast("로그인 실패")
                     MyApplication.loginInfo.loginned = false
                 }
             }
 
             override fun onFailure(call: Call<LoginResult>, t: Throwable) {
-                MyApplication.toastPublisher.onNext("네트워크가 불안정하여 다시 로그인 해야합니다")
+                MyApplication.showToast("로그인 실패")
                 MyApplication.loginInfo.loginned = false
             }
 

@@ -36,7 +36,7 @@ class LoginModel(val navController: NavController) {
             override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
                 if(response.body() == null){
                     // 로그인 실패
-                    MyApplication.toastPublisher.onNext("로그인 실패")
+                    MyApplication.showToast("로그인 실패")
                     MyApplication.loginInfo.loginned = false
                 }
                 else{
