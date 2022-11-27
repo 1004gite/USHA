@@ -23,7 +23,7 @@ class SummaryFragment: Fragment() {
     ): View {
         community = arguments?.getSerializable("community") as Community
         binding = FragmentSummaryBinding.inflate(inflater).apply {
-            lifecycleOwner = this@SummaryFragment
+            lifecycleOwner = this@SummaryFragment.viewLifecycleOwner
             viewModel = ViewModelProvider(this@SummaryFragment,
                 FragmentSummaryViewModel.FragmentSummaryVMFac(
                     DetailModel(this@SummaryFragment.community!!,resources.displayMetrics.widthPixels,  findNavController()).apply { setBitmap(community.introduce_img) })

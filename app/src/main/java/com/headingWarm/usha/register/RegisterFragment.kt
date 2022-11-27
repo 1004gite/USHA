@@ -22,7 +22,7 @@ class RegisterFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate<FragmentRegisterBinding?>(inflater, R.layout.fragment_register,container, false)
-            .apply { lifecycleOwner = this@RegisterFragment }
+            .apply { lifecycleOwner = this@RegisterFragment.viewLifecycleOwner }
 
         viewModel = with(RegisterViewModel.RegisterViewModelFac(RegisterModel(findNavController()))){
             ViewModelProvider(this@RegisterFragment,this).get(RegisterViewModel::class.java)

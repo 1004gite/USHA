@@ -33,7 +33,7 @@ public class ProfileFragment extends Fragment {
         }
 
         binding = FragmentProfileBinding.inflate(inflater, container, false);
-        binding.setLifecycleOwner(this);
+        binding.setLifecycleOwner(this.getViewLifecycleOwner());
         View root = binding.getRoot();
 
         binding.setViewModel(

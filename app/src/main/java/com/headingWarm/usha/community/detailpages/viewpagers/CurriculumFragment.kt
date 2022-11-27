@@ -25,7 +25,7 @@ class CurriculumFragment: Fragment() {
     ): View? {
         community = arguments?.getSerializable("community") as Community?
         binding = FragmentCurriculumBinding.inflate(inflater).apply {
-            lifecycleOwner = this@CurriculumFragment
+            lifecycleOwner = this@CurriculumFragment.viewLifecycleOwner
             viewModel = ViewModelProvider(
                 this@CurriculumFragment,
                 FragmentCurriculumViewModel.FragmentCurriculumVMFac(

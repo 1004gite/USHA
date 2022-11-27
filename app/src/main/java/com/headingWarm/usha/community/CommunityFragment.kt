@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.headingWarm.usha.R
@@ -28,7 +30,7 @@ class CommunityFragment() : Fragment() {
     ): View? {
         viewModel = ViewModelProvider(this).get(CommunityViewModel::class.java)
         binding = DataBindingUtil.inflate<FragmentCommunityBinding>(inflater, R.layout.fragment_community, container, false).apply {
-            lifecycleOwner = this@CommunityFragment
+            lifecycleOwner = this@CommunityFragment.viewLifecycleOwner
             viewModel = this@CommunityFragment.viewModel
         }
 

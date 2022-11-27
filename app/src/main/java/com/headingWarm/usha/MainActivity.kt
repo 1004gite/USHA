@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
@@ -35,12 +36,19 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
 
+//        binding.bottomNavView.setupWithNavController(navController)
+        binding.bottomNavView.setOnItemSelectedListener { menuItem ->
+            Log.e("Listener", menuItem.title.toString())
+            navController.popBackStack(menuItem.itemId, true)
+            navController.navigate(menuItem.itemId)
+            true
+        }
+
         // Toast메세지는 여기서만 받는다.
         MyApplication.toastString.observe(this){
             Toast.makeText(applicationContext, it, Toast.LENGTH_SHORT).show()
         }
 
-        binding.bottomNavView.setupWithNavController(navController)
         checkLoginInfo()
     }
 
@@ -63,6 +71,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         })
+
     }
 
     object BindingAdapters {

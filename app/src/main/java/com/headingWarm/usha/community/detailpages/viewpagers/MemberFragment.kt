@@ -25,7 +25,7 @@ class MemberFragment: Fragment() {
     ): View? {
         community = arguments?.getSerializable("community") as Community?
         binding = FragmentMemberBinding.inflate(inflater).apply {
-            lifecycleOwner = this@MemberFragment
+            lifecycleOwner = this@MemberFragment.viewLifecycleOwner
             viewModel = ViewModelProvider(this@MemberFragment,
                 FragmentMemberViewModel.FragmentMemberVMFac(DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController()).apply { setBitmap(community.mentor_img) }
                 )).get(FragmentMemberViewModel::class.java)

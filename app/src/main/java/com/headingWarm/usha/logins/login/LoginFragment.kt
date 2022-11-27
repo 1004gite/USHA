@@ -22,7 +22,7 @@ class LoginFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate<FragmentLoginBinding?>(inflater,R.layout.fragment_login,container,false).apply {
-            lifecycleOwner = this@LoginFragment
+            lifecycleOwner = this@LoginFragment.viewLifecycleOwner
         }
 
         viewModel = ViewModelProvider(

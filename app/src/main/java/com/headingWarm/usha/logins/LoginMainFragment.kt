@@ -34,7 +34,7 @@ class LoginMainFragment : Fragment() {
 
         viewModel = ViewModelProvider(this, LoginMainViewModel.LoginMainVMFac(findNavController())).get(LoginMainViewModel::class.java)
         binding = DataBindingUtil.inflate<FragmentLoginMainBinding?>(inflater,R.layout.fragment_login_main,container,false).apply {
-            lifecycleOwner = this@LoginMainFragment
+            lifecycleOwner = this@LoginMainFragment.viewLifecycleOwner
             viewModel = this@LoginMainFragment.viewModel
         }
 

@@ -48,7 +48,7 @@ class CommunityDetailFragment() : Fragment() {
         community = arguments?.getSerializable("community") as Community
         navController = findNavController()
         binding = FragmentCommunityDetailBinding.inflate(inflater).apply {
-            lifecycleOwner = this@CommunityDetailFragment
+            lifecycleOwner = this@CommunityDetailFragment.viewLifecycleOwner
             communityDetailBackBtn.setOnClickListener {
                 // 뒤로가기 눌렀을 때 지금 페이지까지 오는 경로는 stack에서 제외하는 옵션
                 var navOps: NavOptions = NavOptions.Builder().setPopUpTo(R.id.community,true).build()

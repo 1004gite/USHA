@@ -34,7 +34,7 @@ class ReviewFragment : Fragment() {
         community = arguments?.getSerializable("community") as Community?
 //        recyclerViewAdapter = ReviewRecyclerAdapter(community!!.reviews, community!!._id)
         binding = FragmentReviewBinding.inflate(inflater).apply {
-            lifecycleOwner = this@ReviewFragment
+            lifecycleOwner = this@ReviewFragment.viewLifecycleOwner
             viewModel = ViewModelProvider(this@ReviewFragment,
                     FragmentReviewViewModel.FragmentReviewVMfac(DetailModel(community!!, resources.displayMetrics.widthPixels, findNavController()))
                 ).get(FragmentReviewViewModel::class.java)

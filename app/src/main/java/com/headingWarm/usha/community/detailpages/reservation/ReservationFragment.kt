@@ -39,7 +39,7 @@ class ReservationFragment : Fragment() {
             )
         ).get(ReservationViewModel::class.java)
         binding = DataBindingUtil.inflate<FragmentReservationBinding?>(inflater,R.layout.fragment_reservation,container,false).apply {
-            lifecycleOwner = this@ReservationFragment
+            lifecycleOwner = this@ReservationFragment.viewLifecycleOwner
             viewModel = this@ReservationFragment.viewModel
         }
         return binding.root
